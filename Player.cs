@@ -74,7 +74,7 @@ public class Player
                 PlayerPosX--;
                 break;
             case MoveDir.Right:
-                PlayerPosY++;
+                PlayerPosX++;
                 break;
 
         }
