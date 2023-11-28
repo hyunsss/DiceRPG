@@ -88,11 +88,11 @@ namespace DiceRPG
         private void Renderer()
         {
             System.Console.Clear();
-            SetCursur(5, 0);
+            SetCursur(0, 26);
             System.Console.WriteLine(User_Status());
-            SetCursur(4, 0);
+            SetCursur(0, 24);
             System.Console.WriteLine(Monster_Status());
-            SetCursur(3, 0);
+            SetCursur(0, 1);
             monster.Sprite.SpriteRender();
         }
 
@@ -103,6 +103,11 @@ namespace DiceRPG
                 "==========================================================================\n",
                 "=== 몬스터 : 이름 체력 hp/fullhp 데미지 :   ================================\n",
             };
+
+            for (int i = 0; i < UI_arr.Length; i++)
+            {
+                Monster_UI.Append(UI_arr[i]);
+            }
 
 
             return Monster_UI;
@@ -125,7 +130,7 @@ namespace DiceRPG
                 "==========================================================================\n"
             };
             for(int i = 0; i < UI_arr.Length; i++) {
-                Player_UI.Append(i);
+                Player_UI.Append(UI_arr[i]);
             }
             return Player_UI;
         }
