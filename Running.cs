@@ -15,8 +15,6 @@ public class Running
 
     public void Run()
     {
-        fightManager.Player_InArea(player);
-        Console.ReadKey();
         while (true)
         {
             Init();

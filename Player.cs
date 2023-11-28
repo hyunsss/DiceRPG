@@ -34,9 +34,10 @@ public class Player : SingleTon<Player>
     }
     public int GetPlayerPosX { get { return PlayerPosX; } set { } }
     public int GetPlayerPosY { get { return PlayerPosY; } set { } }
-    public int GetPlayerHp { get { return Hp; } set { } }
+    public int GetPlayerHp { get { return Hp; } set { Hp = value; } }
     public int GetPlayerFullHp { get { return FullHp; } set { } }
-    public bool GetIsFight { get { return IsFight; } set { } }
+    public int GetPlayerDamage { get { return Damage; } set { } }
+    public bool GetIsFight { get { return IsFight; } set { IsFight = value; } }
 
     public void Init()
     {
@@ -110,19 +111,19 @@ public class Player : SingleTon<Player>
         }
     }
 
+    public void Attack(Monster monster)
+    {
+        monster.GetHp -= Damage;
+        Console.WriteLine("플레이어가 공격합니다!");
+    }
+
 
     public void GetMap(Map map)
     {
         this.map = map;
     }
 
-    private int SettingDiceNumber()
-    {
-        Random rand = new Random();
-        int Num = rand.Next(1, 6);
-
-        return Num;
-    }
+    
 
 
 

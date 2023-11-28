@@ -10,6 +10,7 @@ namespace DiceRPG
     {
         public AsciiSprite Sprite = new AsciiSprite();
         protected StringBuilder sb;
+        protected string name;
         protected int Hp;
         protected int FullHp;
         protected int Damage;
@@ -22,7 +23,8 @@ namespace DiceRPG
         }
 
 
-        public abstract void Attack();
+        public abstract void Attack(Player player);
+        public string GetName { get { return name; } }
         public int GetHp { get { return Hp;} set { Hp = value; } }
         public int GetFullHp { get { return FullHp;} set { FullHp = value; } }
         public int GetDamage { get { return Damage;} set { Damage = value; } }
@@ -35,9 +37,9 @@ namespace DiceRPG
         public Toriel()
         {
             Sprite = new S_Toriel();
-            Hp = 500;
-            FullHp = 500;
-            Damage = 30;
+            Hp = 10;
+            FullHp = 10;
+            Damage = 1;
             
         }
 
@@ -45,23 +47,24 @@ namespace DiceRPG
 
         }
 
-        public override void Attack()
+        public override void Attack(Player player)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("  . . . .  ");
         }
     }
     public class Jery : Monster
     {
         public Jery() {
             Sprite = new S_Jery();
-            Hp = 500;
-            FullHp = 500;
-            Damage = 30;
+            Hp = 45;
+            FullHp = 45;
+            Damage = 8;
             
         }
-        public override void Attack()
+        public override void Attack(Player player)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(" . . . . . . ");
+            player.GetPlayerHp -= this.Damage;
         }
     }
     public class Wimson : Monster
@@ -74,9 +77,10 @@ namespace DiceRPG
             Damage = 30;
             
         }
-        public override void Attack()
+        public override void Attack(Player player)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(" . . . . . . !! ");
+            player.GetPlayerHp -= this.Damage;
         }
     }
     public class GreatDog : Monster
@@ -89,9 +93,10 @@ namespace DiceRPG
             Damage = 30;
             
         }
-        public override void Attack()
+        public override void Attack(Player player)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("왈! 왈!");
+            player.GetPlayerHp -= this.Damage;
         }
     }
     public class Flowey : Monster
@@ -104,9 +109,10 @@ namespace DiceRPG
             Damage = 30;
 
         }
-        public override void Attack()
+        public override void Attack(Player player)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("ㅎ ㅎ ㅎ ㅎ ");
+            player.GetPlayerHp -= this.Damage;
         }
     }
 
@@ -119,7 +125,7 @@ namespace DiceRPG
             Damage = 30;
             
         }
-        public override void Attack()
+        public override void Attack(Player player)
         {
             throw new NotImplementedException();
         }
@@ -135,7 +141,7 @@ namespace DiceRPG
             
 
         }
-        public override void Attack()
+        public override void Attack(Player player)
         {
             throw new NotImplementedException();
         }
@@ -151,7 +157,7 @@ namespace DiceRPG
             
 
         }
-        public override void Attack()
+        public override void Attack(Player player)
         {
             throw new NotImplementedException();
         }

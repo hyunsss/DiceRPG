@@ -11,19 +11,15 @@ namespace DiceRPG
     public class FightManager : SingleTon<FightManager>
     {
         enum RandomMonster { Flowey, GreatDog, Wimson, Jery }
-        Monster monster;
+        Monster monster = null;
 
-        private static void SetCursur(int a, int b)
-        {
-            Console.SetCursorPosition(a, b);
-        }
         public void Player_InArea(Player player)
         {
             CreateRandomMonster(out monster);
             Renderer();
             Fight(monster, player);
         }
-        //https://passwordkim.tistory.com/21
+
         private static void CreateRandomMonster(out Monster monster)
         {
 
@@ -61,12 +57,33 @@ namespace DiceRPG
                 //플레이어 공격 턴
                 if (PlayerAttackTrue)
                 {
-                    //
+                    string answer = Console.ReadLine();
+
+                    switch (answer)
+                    {
+                        case "1":
+                            //공격하기
+                            player.Attack(monster);
+                            Thread.Sleep(200);
+                            Renderer();
+                            break;
+                        case "2":
+                            //아이템 사용
+                            break;
+                        case "3":
+                            //도망가기
+                            player.GetIsFight = false;
+                            return;
+                        default:
+                            continue;
+                    }
+                    PlayerAttackTrue = false;
                 }
                 //몬스터 공격 턴
                 else
                 {
-                    monster.Attack();
+                    monster.Attack(player);
+                    PlayerAttackTrue = true;
                 }
 
                 if (monster.GetHp <= 0)
@@ -87,53 +104,58 @@ namespace DiceRPG
 
         private void Renderer()
         {
-            System.Console.Clear();
-            SetCursur(0, 26);
-            System.Console.WriteLine(User_Status());
-            SetCursur(0, 24);
-            System.Console.WriteLine(Monster_Status());
-            SetCursur(0, 1);
+            Console.Clear();
+            Console.WriteLine("\n\n");
             monster.Sprite.SpriteRender();
+            Console.WriteLine("\n\n\n");
+            System.Console.WriteLine(Monster_Status());
+            Console.WriteLine("\t 1. 공격하기  \t   2. 아이템 사용  \t 3. 도망가기");
+            Console.WriteLine(User_Status());
+
+
         }
 
-        private static StringBuilder Monster_Status() {
+        private StringBuilder Monster_Status() {
             StringBuilder Monster_UI = new StringBuilder();
-            string[] UI_arr = 
-            {
-                "==========================================================================\n",
-                "=== 몬스터 : 이름 체력 hp/fullhp 데미지 :   ================================\n",
-            };
 
-            for (int i = 0; i < UI_arr.Length; i++)
-            {
-                Monster_UI.Append(UI_arr[i]);
-            }
+            Monster_UI.AppendFormat("___________________________________________________________________________\n");
+            Monster_UI.AppendFormat("|                                                                         |\n");
+            Monster_UI.AppendFormat("|  몬스터 : {0}   체력 {1} / {2}   데미지 : {3}                               |\n", monster.GetName, monster.GetHp, monster.GetFullHp, monster.GetDamage );
+            Monster_UI.AppendFormat("|_________________________________________________________________________|\n");
 
 
             return Monster_UI;
         }
 
-        private static StringBuilder User_Status()
+        private StringBuilder User_Status()
         {
             StringBuilder Player_UI = new StringBuilder();
-            string[] UI_arr =
-            {
-                "==========================================================================\n",
-                "=               == 주사위 능력  :       ===================================\n",
-                "=               ==                                        ================\n",
-                "=               ==                                        ================\n",
-                "=               ==========================================================\n",
-                "=               ==========================================================\n",
-                "=               ==========================================================\n",
-                "==========================================================================\n",
-                "== 체력 : hp/fullhp : 일반 데미지 :  스킬 데미지 :       ===================\n",
-                "==========================================================================\n"
-            };
-            for(int i = 0; i < UI_arr.Length; i++) {
-                Player_UI.Append(UI_arr[i]);
-            }
+            DiceNumber dicenumber = new DiceNumber();
+            int num = SettingDiceNumber();
+
+            Player_UI.AppendFormat("___________________________________________________________________________\n");
+            Player_UI.AppendFormat("|{0}|                                                       |\n", dicenumber.Dice[num,0]);
+            Player_UI.AppendFormat("|{0}|  1 확률 : {1}     2 확률 : {2}      3 확률 : {3}       |\n", dicenumber.Dice[num,1],1,1,1);
+            Player_UI.AppendFormat("|{0}|_______________________________________________________|\n", dicenumber.Dice[num,2]);
+            Player_UI.AppendFormat("|{0}|                                                       |\n", dicenumber.Dice[num,3]);
+            Player_UI.AppendFormat("|{0}|  4 확률 : {1}     5 확률 : {2}      6 확률 : {3}       |\n", dicenumber.Dice[num,4],1,1,1);
+            Player_UI.AppendFormat("|{0}|_______________________________________________________|\n", dicenumber.Dice[num,5]);
+            Player_UI.AppendFormat("|{0}|                                                       |\n", dicenumber.Dice[num,6]);
+            Player_UI.AppendFormat("|{0}|  주사위 능력 : {1}                                     |\n", dicenumber.Dice[num,7], 1);
+            Player_UI.AppendFormat("|_________________|_______________________________________________________|\n");
+            Player_UI.AppendFormat("|                  |                                                      |\n");
+            Player_UI.AppendFormat("| 체력 : {0} / {1} |  일반 데미지 : {2}  스킬 데미지 :                     |\n", Player.GetInstance().GetPlayerHp, Player.GetInstance().GetPlayerFullHp, Player.GetInstance().GetPlayerDamage);
+            Player_UI.AppendFormat("|__________________|______________________________________________________|\n");
             return Player_UI;
+
         }
 
+        private static int SettingDiceNumber()
+        {
+            Random rand = new Random();
+            int Num = rand.Next(1, 6);
+
+            return Num;
+        }
     }
 }
