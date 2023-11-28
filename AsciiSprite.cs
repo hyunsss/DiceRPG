@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace DiceRPG
 {
-    public abstract class AsciiSprite
+    public class AsciiSprite
     {
         public StringBuilder sb;
+
+        public void SpriteRender() {
+            System.Console.Write(sb);
+        }
 
     }
 

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DiceRPG
 {
-    public class Monster
+    public abstract class Monster
     {
-        
+        public AsciiSprite Sprite = new AsciiSprite();
         protected StringBuilder sb;
         protected int Hp;
         protected int FullHp;
@@ -21,6 +21,8 @@ namespace DiceRPG
 
         }
 
+
+        public abstract void Attack();
         public int GetHp { get { return Hp;} set { Hp = value; } }
         public int GetFullHp { get { return FullHp;} set { FullHp = value; } }
         public int GetDamage { get { return Damage;} set { Damage = value; } }
@@ -30,90 +32,128 @@ namespace DiceRPG
 
     public class Toriel : Monster
     {
-        private S_Toriel Sprite = new S_Toriel();
         public Toriel()
         {
+            Sprite = new S_Toriel();
             Hp = 500;
             FullHp = 500;
             Damage = 30;
             
+        }
+
+        public void PrintSprite() {
+
+        }
+
+        public override void Attack()
+        {
+            throw new NotImplementedException();
         }
     }
     public class Jery : Monster
     {
-        private Jery Sprite = new Jery();
         public Jery() {
+            Sprite = new S_Jery();
             Hp = 500;
             FullHp = 500;
             Damage = 30;
             
+        }
+        public override void Attack()
+        {
+            throw new NotImplementedException();
         }
     }
     public class Wimson : Monster
     {
-        private S_Wimson Sprite = new S_Wimson();
         public Wimson()
         {
+            Sprite = new S_Wimson();
             Hp = 500;
             FullHp = 500;
             Damage = 30;
             
+        }
+        public override void Attack()
+        {
+            throw new NotImplementedException();
         }
     }
     public class GreatDog : Monster
     {
-        private S_GreatDog Sprite = new S_GreatDog();
         public GreatDog()
         {
+            Sprite = new S_GreatDog();
             Hp = 500;
             FullHp = 500;
             Damage = 30;
             
         }
+        public override void Attack()
+        {
+            throw new NotImplementedException();
+        }
     }
     public class Flowey : Monster
     {
-        private S_Flowey Sprite = new S_Flowey();
+        
         public Flowey() {
+            Sprite = new S_Flowey();
             Hp = 500;
             FullHp = 500;
             Damage = 30;
 
+        }
+        public override void Attack()
+        {
+            throw new NotImplementedException();
         }
     }
 
     public class PapyRus : Monster
     {
-        private S_PapyRus Sprite = new S_PapyRus();
         public PapyRus() {
+            Sprite = new S_PapyRus();
             Hp = 500;
             FullHp = 500;
             Damage = 30;
             
+        }
+        public override void Attack()
+        {
+            throw new NotImplementedException();
         }
     }
     public class Sanz : Monster
     {
-        private S_Sanz Sprite = new S_Sanz();
         public Sanz()
         {
+            Sprite = new S_Sanz();
             Hp = 500;
             FullHp = 500;
             Damage = 30;
             
 
         }
+        public override void Attack()
+        {
+            throw new NotImplementedException();
+        }
     }
     public class Undyne : Monster
     {
-        private S_Undyne Sprite = new S_Undyne();
         public Undyne()
         {
+            Sprite = new S_Undyne();
             Hp = 500;
             FullHp = 500;
             Damage = 30;
             
 
+        }
+        public override void Attack()
+        {
+            throw new NotImplementedException();
         }
     }
 }

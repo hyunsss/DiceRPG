@@ -5,6 +5,7 @@ using System.Threading.Tasks.Dataflow;
 
 public class Player
 {
+    FightManager fightManager = new FightManager();
     enum MoveDir { Up, Down, Left, Right, None }
     enum MapDir { Block = '#', Monster = 'M'}
     private int FullHp;
@@ -98,10 +99,7 @@ public class Player
             PlayerPosX = prevPosX;
         } else if(map.MapList[Mapindex][PlayerPosY, PlayerPosX] == (char)MapDir.Monster)
         {
-            //���͸� ������ ��
-            
-            
-
+            fightManager.Player_InArea(this);
         }
 
 
@@ -114,21 +112,7 @@ public class Player
         this.map = map;
     }
 
-    private void User_Status()
-    {
-        StringBuilder UI = new StringBuilder();
-        string str1 = "========================================================================";
-        string str2 = "=               == 주사위 능력  :       ===================================";
-        string str3 = "=               ==                                        ==============";
-        string str4 = "=               ==                                        ==============";
-        string str5 = "=               ========================================================";
-        string str6 = "=               ========================================================";
-        string str7 = "=               ========================================================";
-        string str8 = "========================================================================";
-        string str9 = "== 체력 : hp/fullhp : 일반 데미지 :  스킬 데미지 :       ======================";
-        string str10 = "========================================================================";
-    }
-
+    
 
 
     private int SettingDiceNumber() {
