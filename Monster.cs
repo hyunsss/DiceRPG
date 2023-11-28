@@ -8,10 +8,21 @@ namespace DiceRPG
 {
     public class Monster
     {
+        
         protected StringBuilder sb;
         protected int Hp;
         protected int FullHp;
         protected int Damage;
+
+
+
+        public void Update()
+        {
+
+        }
+
+        
+
     }
 
     public class Toriel : Monster
