@@ -8,10 +8,7 @@ public class Running
     private void Init()
     {
         map.GetPlayer(player);
-        
-        
-
-
+        player.GetMap(map);
     }
 
     public void Run()
@@ -24,7 +21,5 @@ public class Running
         }
         
     }
-
-
 
 }

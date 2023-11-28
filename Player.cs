@@ -1,15 +1,22 @@
+using DiceRPG;
+using System.Reflection.Metadata.Ecma335;
+using System.Text;
 using System.Threading.Tasks.Dataflow;
 
 public class Player
 {
     enum MoveDir { Up, Down, Left, Right, None }
+    enum MapDir { Block = '#', Monster = 'M'}
     private int FullHp;
     private int Hp;
     private int Damage;
     private int PlayerPosX;
     private int PlayerPosY;
     private List<Skill> Player_Skills = new List<Skill>();
+    int Mapindex;
+    private Map map; 
     MoveDir Move_Key;
+    Monster monster;
 
     ConsoleKeyInfo info;
     ConsoleKey key;
@@ -25,6 +32,11 @@ public class Player
     }
     public int GetPlayerPosX { get { return PlayerPosX; } set { } }
     public int GetPlayerPosY { get { return PlayerPosY; } set { } }
+
+    public void Init()
+    {
+        int Mapindex = map.GetMapIndex;
+    }
 
     public void Update()
     {
@@ -59,9 +71,8 @@ public class Player
 
     private void Move()
     {
-
-
-
+        int prevPosX = PlayerPosX;
+        int prevPosY = PlayerPosY;
         switch (Move_Key)
         {
             case MoveDir.Up:
@@ -76,12 +87,45 @@ public class Player
             case MoveDir.Right:
                 PlayerPosX++;
                 break;
+        }
+
+        if (map.MapList[Mapindex][PlayerPosY, PlayerPosX] == (char)MapDir.Block)
+        {
+            PlayerPosY = prevPosY;
+            PlayerPosX = prevPosX;
+        } else if(map.MapList[Mapindex][PlayerPosY, PlayerPosX] == (char)MapDir.Monster)
+        {
+            //몬스터를 만났을 때
+            
+            
 
         }
 
 
 
+
     }
+
+    public void GetMap(Map map)
+    {
+        this.map = map;
+    }
+
+    private void User_Status()
+    {
+        StringBuilder UI = new StringBuilder();
+        string str1 = "========================================================================";
+        string str2 = "=               == 주사위 능력 :     ====================================";
+        string str3 = "=               ==                                        ==============";
+        string str4 = "=               ==                                        ==============";
+        string str5 = "=               ========================================================";
+        string str6 = "=               ========================================================";
+        string str7 = "=               ========================================================";
+        string str8 = "========================================================================";
+        string str9 = "== 이름 : 체력  hp/fullhp : 기본 데미지 :  스킬 데미지=====================";
+        string str10 = "========================================================================";
+    }
+
 
 
 }
