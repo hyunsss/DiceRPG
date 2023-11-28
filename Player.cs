@@ -3,22 +3,22 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks.Dataflow;
 
-public class Player
+public class Player : SingleTon<Player>
 {
     FightManager fightManager = new FightManager();
     enum MoveDir { Up, Down, Left, Right, None }
-    enum MapDir { Block = '#', Monster = 'M'}
+    enum MapDir { Block = '#', Monster = 'M' }
     private int FullHp;
     private int Hp;
     private int Damage;
     private int PlayerPosX;
     private int PlayerPosY;
     private int DiceNumber;
+    private bool IsFight = false;
     private List<Skill> Player_Skills = new List<Skill>();
     int Mapindex;
-    private Map map; 
+    private Map map;
     MoveDir Move_Key;
-    Monster monster;
 
     ConsoleKeyInfo info;
     ConsoleKey key;
@@ -36,6 +36,7 @@ public class Player
     public int GetPlayerPosY { get { return PlayerPosY; } set { } }
     public int GetPlayerHp { get { return Hp; } set { } }
     public int GetPlayerFullHp { get { return FullHp; } set { } }
+    public bool GetIsFight { get { return IsFight; } set { } }
 
     public void Init()
     {
@@ -93,29 +94,30 @@ public class Player
                 break;
         }
 
+        NextPositionBlock(prevPosY, prevPosX);
+    }
+
+    private void NextPositionBlock(int prevPosY, int prevPosX)
+    {
         if (map.MapList[Mapindex][PlayerPosY, PlayerPosX] == (char)MapDir.Block)
         {
             PlayerPosY = prevPosY;
             PlayerPosX = prevPosX;
-        } else if(map.MapList[Mapindex][PlayerPosY, PlayerPosX] == (char)MapDir.Monster)
-        {
-            fightManager.Player_InArea(this);
         }
-
-
-
-
+        else if (map.MapList[Mapindex][PlayerPosY, PlayerPosX] == (char)MapDir.Monster)
+        {
+            IsFight = true;
+        }
     }
+
 
     public void GetMap(Map map)
     {
         this.map = map;
     }
 
-    
-
-
-    private int SettingDiceNumber() {
+    private int SettingDiceNumber()
+    {
         Random rand = new Random();
         int Num = rand.Next(1, 6);
 

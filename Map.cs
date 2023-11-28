@@ -3,7 +3,7 @@ using System;
 public class Map
 {
     public List<char[,]> MapList = new List<char[,]>();
-    Player player;
+    Player player = Player.GetInstance();
     private int MapIndex = 0;
 
     char[,] BasicMap =
@@ -54,10 +54,6 @@ public class Map
         get { return MapIndex; } set { MapIndex = value; }
     }
 
-    public void GetPlayer(Player player)
-    {
-        this.player = player;
-    }
 
 
 

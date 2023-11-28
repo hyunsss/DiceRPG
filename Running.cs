@@ -1,23 +1,30 @@
+using DiceRPG;
+
 public class Running
 {
 
-    Player player = new Player();
+    Player player = Player.GetInstance();
+    FightManager fightManager = FightManager.GetInstance();
     Map map = new Map();
 
 
     private void Init()
     {
-        map.GetPlayer(player);
         player.GetMap(map);
     }
 
     public void Run()
     {
+        fightManager.Player_InArea(player);
+        Console.ReadKey();
         while (true)
         {
             Init();
             map.Update();
             player.Update();
+            if(player.GetIsFight) {
+                fightManager.Player_InArea(player);
+            }
         }
         
     }
