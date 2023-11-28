@@ -130,8 +130,3 @@ public class Player : SingleTon<Player>
 
 
 }
-
-class Skill
-{
-
-}
