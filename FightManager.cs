@@ -14,10 +14,12 @@ namespace DiceRPG
 
         public void Player_InArea()
         {
+            Monster monster;
+            CreateRandomMonster(out monster);
 
         }
         //https://passwordkim.tistory.com/21
-        public static void CreateRandomMonster(out Monster monster)
+        private static void CreateRandomMonster(out Monster monster)
         {
 
             Random rand = new Random();
@@ -46,6 +48,32 @@ namespace DiceRPG
                     monster = new Monster();
                     break;
             }
+        }
+
+        private void Fight(Monster monster, Player player) {
+            bool PlayerAttackTrue = true;
+            bool HasDie = false;
+            while(!HasDie) {
+                
+                //플레이어 공격 턴
+                if(PlayerAttackTrue) {
+                    //
+                } 
+                //몬스터 공격 턴
+                else {
+                    //
+                }       
+
+                if(monster.GetHp <= 0) {
+                    System.Console.WriteLine("몬스터를 쓰러트렸습니다!! ");
+                    HasDie = true;
+                } else if(player.GetPlayerHp <= 0) {
+                    System.Console.WriteLine("플레이어가 쓰러졌습니다....");
+                    HasDie = true;
+                    //Todo 게임 종료 함수
+                }
+            }
+
         }
     }
 }

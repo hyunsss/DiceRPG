@@ -12,6 +12,7 @@ public class Player
     private int Damage;
     private int PlayerPosX;
     private int PlayerPosY;
+    private int DiceNumber;
     private List<Skill> Player_Skills = new List<Skill>();
     int Mapindex;
     private Map map; 
@@ -32,6 +33,8 @@ public class Player
     }
     public int GetPlayerPosX { get { return PlayerPosX; } set { } }
     public int GetPlayerPosY { get { return PlayerPosY; } set { } }
+    public int GetPlayerHp { get { return Hp; } set { } }
+    public int GetPlayerFullHp { get { return FullHp; } set { } }
 
     public void Init()
     {
@@ -95,7 +98,7 @@ public class Player
             PlayerPosX = prevPosX;
         } else if(map.MapList[Mapindex][PlayerPosY, PlayerPosX] == (char)MapDir.Monster)
         {
-            //¸ó½ºÅÍ¸¦ ¸¸³µÀ» ¶§
+            //ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
             
             
 
@@ -115,15 +118,24 @@ public class Player
     {
         StringBuilder UI = new StringBuilder();
         string str1 = "========================================================================";
-        string str2 = "=               == ÁÖ»çÀ§ ´É·Â :     ====================================";
+        string str2 = "=               == ì£¼ì‚¬ìœ„ ëŠ¥ë ¥  :       ===================================";
         string str3 = "=               ==                                        ==============";
         string str4 = "=               ==                                        ==============";
         string str5 = "=               ========================================================";
         string str6 = "=               ========================================================";
         string str7 = "=               ========================================================";
         string str8 = "========================================================================";
-        string str9 = "== ÀÌ¸§ : Ã¼·Â  hp/fullhp : ±âº» µ¥¹ÌÁö :  ½ºÅ³ µ¥¹ÌÁö=====================";
+        string str9 = "== ì²´ë ¥ : hp/fullhp : ì¼ë°˜ ë°ë¯¸ì§€ :  ìŠ¤í‚¬ ë°ë¯¸ì§€ :       ======================";
         string str10 = "========================================================================";
+    }
+
+
+
+    private int SettingDiceNumber() {
+        Random rand = new Random();
+        int Num = rand.Next(1, 6);
+
+        return Num;
     }
 
 

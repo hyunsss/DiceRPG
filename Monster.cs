@@ -21,6 +21,9 @@ namespace DiceRPG
 
         }
 
+        public int GetHp { get { return Hp;} set { Hp = value; } }
+        public int GetFullHp { get { return FullHp;} set { FullHp = value; } }
+        public int GetDamage { get { return Damage;} set { Damage = value; } }
         
 
     }
