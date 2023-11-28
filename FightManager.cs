@@ -83,17 +83,20 @@ namespace DiceRPG
                 else
                 {
                     monster.Attack(player);
+                    Renderer();
                     PlayerAttackTrue = true;
                 }
 
                 if (monster.GetHp <= 0)
                 {
                     System.Console.WriteLine("몬스터를 쓰러트렸습니다!! ");
+                    player.GetIsFight = false;
                     HasDie = true;
                 }
                 else if (player.GetPlayerHp <= 0)
                 {
                     System.Console.WriteLine("플레이어가 쓰러졌습니다....");
+                    player.GetIsFight = false;
                     HasDie = true;
                     //Todo 게임 종료 함수
                 }

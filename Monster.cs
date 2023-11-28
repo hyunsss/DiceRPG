@@ -72,9 +72,9 @@ namespace DiceRPG
         public Wimson()
         {
             Sprite = new S_Wimson();
-            Hp = 500;
-            FullHp = 500;
-            Damage = 30;
+            Hp = 30;
+            FullHp = 30;
+            Damage = 5;
             
         }
         public override void Attack(Player player)
@@ -88,9 +88,9 @@ namespace DiceRPG
         public GreatDog()
         {
             Sprite = new S_GreatDog();
-            Hp = 500;
-            FullHp = 500;
-            Damage = 30;
+            Hp = 80;
+            FullHp = 80;
+            Damage = 5;
             
         }
         public override void Attack(Player player)
@@ -104,8 +104,8 @@ namespace DiceRPG
         
         public Flowey() {
             Sprite = new S_Flowey();
-            Hp = 500;
-            FullHp = 500;
+            Hp = 15;
+            FullHp = 15;
             Damage = 30;
 
         }

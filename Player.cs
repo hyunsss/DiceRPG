@@ -107,6 +107,8 @@ public class Player : SingleTon<Player>
         }
         else if (map.MapList[Mapindex][PlayerPosY, PlayerPosX] == (char)MapDir.Monster)
         {
+            PlayerPosY = prevPosY;
+            PlayerPosX = prevPosX;
             IsFight = true;
         }
     }
