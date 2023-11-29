@@ -19,8 +19,6 @@ public class Running
         
         map = new Map(this);
         player.GetMap(map);
-
-        Dice.GetInstance.DicePercent();
         Dice.GetInstance.DiceCurculate();
     }
 
