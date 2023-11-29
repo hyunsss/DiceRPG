@@ -2,6 +2,7 @@
 using System;
 using System.Text;
 using System.Runtime.CompilerServices;
+using System.Drawing;
 
 namespace DiceRPG
 {
@@ -10,6 +11,7 @@ namespace DiceRPG
 
         static void Main(string[] args)
         {
+
             Running running = new Running();
             running.Run();
         }

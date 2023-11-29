@@ -5,7 +5,6 @@ using System.Threading.Tasks.Dataflow;
 
 public class Player : SingleTon<Player>
 {
-    FightManager fightManager = new FightManager();
     enum MoveDir { Up, Down, Left, Right, None }
     enum MapDir { Block = '#', Monster = 'M' }
     private int FullHp;

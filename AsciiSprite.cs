@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DiceRPG
 {
-    public class AsciiSprite
+    public class AsciiSprite : SingleTon<AsciiSprite>
     {
         public StringBuilder sb;
 

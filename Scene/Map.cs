@@ -1,9 +1,12 @@
 using System.Runtime.CompilerServices;
 using System;
-public class Map
+using DiceRPG;
+
+public class Map : Scene
 {
+    enum MapIndexDir { BasicMap }
     public List<char[,]> MapList = new List<char[,]>();
-    Player player = Player.GetInstance();
+    Player player = Player.GetInstance;
     private int MapIndex = 0;
 
     char[,] BasicMap =
@@ -18,41 +21,49 @@ public class Map
 
   };
 
+    public Map(Running running) : base(running)
+    {
+    }
+
+    public int GetMapIndex
+    {
+        get { return MapIndex; }
+        set { MapIndex = value; }
+    }
 
     void Init()
     {
         MapList.Add(BasicMap);
     }
 
-    public void Update()
+    public override void Update()
     {
         Init();
-        Renderer();
+        Render();
     }
 
-
-    void Renderer()
+    public override void Render()
     {
+        PrintMap();
+    }
 
+    private void PrintMap()
+    {
         System.Console.Clear();
-        for (int y = 0; y < BasicMap.GetLength(0); y++)
+        for (int y = 0; y < MapList[MapIndex].GetLength(0); y++)
         {
-            for (int x = 0; x < BasicMap.GetLength(1); x++)
+            for (int x = 0; x < MapList[MapIndex].GetLength(1); x++)
             {
-                System.Console.Write(BasicMap[y, x]);
+                System.Console.Write(MapList[MapIndex][y, x]);
             }
             System.Console.WriteLine();
         }
 
         Console.SetCursorPosition(player.GetPlayerPosX, player.GetPlayerPosY);
         Console.WriteLine("P");
-
     }
 
-    public int GetMapIndex
-    {
-        get { return MapIndex; } set { MapIndex = value; }
-    }
+    
 
 
 
