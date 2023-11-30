@@ -6,18 +6,14 @@ using System.Threading.Tasks.Dataflow;
 public class Player : SingleTon<Player>
 {
     enum MoveDir { Up, Down, Left, Right, None }
-    enum MapDir { Block = '#', Monster = 'M' }
+    
     private int FullHp;
     private int Hp;
     private int Damage;
-    private int PlayerPosX;
-    private int PlayerPosY;
-    private int DiceNumber;
+    public Position pos;
     private bool IsFight = false;
     public List<Skill> Player_Skills = new List<Skill>();
     public List<Item> Player_Items = new List<Item>(); 
-    int Mapindex;
-    private Map map;
     MoveDir Move_Key;
 
     ConsoleKeyInfo info;
@@ -29,12 +25,11 @@ public class Player : SingleTon<Player>
         FullHp = 100;
         Hp = 100;
         Damage = 10;
-        PlayerPosX = 1;
-        PlayerPosY = 1;
+        pos.x = 1;
+        pos.y = 1;
         
     }
-    public int GetPlayerPosX { get { return PlayerPosX; } set { } }
-    public int GetPlayerPosY { get { return PlayerPosY; } set { } }
+  
     public int GetPlayerHp { get { return Hp; } set { Hp = value; } }
     public int GetPlayerFullHp { get { return FullHp; } set { } }
     public int GetPlayerDamage { get { return Damage; } set { } }
@@ -51,7 +46,7 @@ public class Player : SingleTon<Player>
     }
     public void Init()
     {
-        int Mapindex = map.GetMapIndex;
+        
     }
 
     public void Update()
@@ -88,38 +83,38 @@ public class Player : SingleTon<Player>
 
     private void Move()
     {
-        int prevPosX = PlayerPosX;
-        int prevPosY = PlayerPosY;
+        Position PrevPos = pos;
+        
         switch (Move_Key)
         {
             case MoveDir.Up:
-                PlayerPosY--;
+                pos.y--;
                 break;
             case MoveDir.Down:
-                PlayerPosY++;
+                pos.y++;
                 break;
             case MoveDir.Left:
-                PlayerPosX--;
+                pos.x--;
                 break;
             case MoveDir.Right:
-                PlayerPosX++;
+                pos.x++;
                 break;
         }
 
-        NextPositionBlock(prevPosY, prevPosX);
+        NextPositionBlock(PrevPos);
     }
 
-    private void NextPositionBlock(int prevPosY, int prevPosX)
+    private void NextPositionBlock(Position PrevPos)
     {
-        if (map.MapList[Mapindex][PlayerPosY, PlayerPosX] == (char)MapDir.Block)
+        if (Data.map[pos.y, pos.x] == (char)Map.MapDir.Block)
         {
-            PlayerPosY = prevPosY;
-            PlayerPosX = prevPosX;
+            pos.y = PrevPos.y;
+            pos.x = PrevPos.x;
         }
-        else if (map.MapList[Mapindex][PlayerPosY, PlayerPosX] == (char)MapDir.Monster)
+        else if (Data.MonsterInPos(pos) != null)
         {
-            PlayerPosY = prevPosY;
-            PlayerPosX = prevPosX;
+/*            pos.y = PrevPos.y;
+            pos.x = PrevPos.x;*/
             IsFight = true;
         }
     }
@@ -128,15 +123,9 @@ public class Player : SingleTon<Player>
     {
         monster.GetHp -= Damage;
         Console.WriteLine("플레이어가 공격합니다!");
+
     }
 
-
-    public void GetMap(Map map)
-    {
-        this.map = map;
-    }
-
-    
 
 
 

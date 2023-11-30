@@ -14,14 +14,16 @@ public class Running
         //콘솔 윈도우 사이즈
         Console.SetWindowSize(75, 48);
 
+        Data.Init();
 
         player = Player.GetInstance;
         fightManager = new FightManager(this);
         inventoryScene = new InventoryScene(this);
         fightManager.GetInventoryScene(inventoryScene);
         map = new Map(this);
-        player.GetMap(map);
         Dice.GetInstance.DiceCurculate();
+        Data.BasicMap();
+        
     }
 
     public void Run()
@@ -32,7 +34,11 @@ public class Running
         {
             map.Update();
             player.Update();
-            if(player.GetIsFight) {
+            foreach (Monster monster in Data.monsters)
+            {
+                monster.MoveAction();
+            }
+            if (player.GetIsFight) {
                 fightManager.Update();
             }
         }

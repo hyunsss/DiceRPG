@@ -11,8 +11,8 @@ namespace DiceRPG
     public class FightManager : Scene
     {
         InventoryScene inventoryScene;
+        Monster FightMonster;
         enum RandomMonster { Flowey, GreatDog, Wimson, Jery }
-        Monster monster = null;
 
         public FightManager(Running running) : base(running)
         {
@@ -22,42 +22,16 @@ namespace DiceRPG
         {
             Console.Clear();
             Console.WriteLine("\n\n");
-            monster.Sprite.SpriteRender();
+            FightMonster.Sprite.SpriteRender();
             Console.WriteLine();
-            Console.WriteLine(UI.GetInstance.Status(monster)); 
+            Console.WriteLine(UI.GetInstance.Status(FightMonster)); 
         }
 
         public override void Update()
         {
-            CreateRandomMonster(out monster);
+            FightMonster = Data.MonsterInPos(Player.GetInstance.pos);
             Render();
-            Fight(monster, Player.GetInstance);
-        }
-
-        private static void CreateRandomMonster(out Monster monster)
-        {
-            Random rand = new Random();
-            int respawn = rand.Next(0, 3);
-
-            switch (respawn)
-            {
-                case (int)RandomMonster.Flowey:
-                    monster = new Flowey();
-                    break;
-                case (int)RandomMonster.GreatDog:
-                    monster = new GreatDog();
-                    break;
-                case (int)RandomMonster.Wimson:
-                    monster = new Wimson();
-                    break;
-                case (int)RandomMonster.Jery:
-                    monster = new Jery();
-                    break;
-                default:
-                    Console.WriteLine("CreateRandomMonster(). Default Exception");
-                    monster = null;
-                    break;
-            }
+            Fight(FightMonster, Player.GetInstance);
         }
 
         private void Fight(Monster monster, Player player)
@@ -108,6 +82,7 @@ namespace DiceRPG
                     System.Console.WriteLine("몬스터를 쓰러트렸습니다!! ");
                     player.GetIsFight = false;
                     HasDie = true;
+                    Data.monsters.Remove(monster);
                 }
                 else if (player.GetPlayerHp <= 0)
                 {

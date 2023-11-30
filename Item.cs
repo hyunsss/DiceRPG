@@ -38,6 +38,8 @@ namespace DiceRPG
             {
                 Player.GetInstance.GetPlayerHp = Player.GetInstance.GetPlayerFullHp;
             }
+
+            Player.GetInstance.Player_Items.Remove(this);
         }
 
     }
