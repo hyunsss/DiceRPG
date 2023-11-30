@@ -10,6 +10,7 @@ namespace DiceRPG
 {
     public class FightManager : Scene
     {
+        InventoryScene inventoryScene;
         enum RandomMonster { Flowey, GreatDog, Wimson, Jery }
         Monster monster = null;
 
@@ -81,6 +82,8 @@ namespace DiceRPG
                             break;
                         case "2":
                             //아이템 사용
+                            inventoryScene.Update();
+                            Render();
                             break;
                         case "3":
                             //도망가기
@@ -115,6 +118,11 @@ namespace DiceRPG
                 }
             }
 
+        }
+
+        public void GetInventoryScene(InventoryScene invenScene)
+        {
+            this.inventoryScene = invenScene;
         }
     }
 }

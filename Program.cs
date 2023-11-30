@@ -14,6 +14,7 @@ namespace DiceRPG
 
             Running running = new Running();
             running.Run();
+            
         }
     }
 }

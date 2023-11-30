@@ -14,7 +14,8 @@ public class Player : SingleTon<Player>
     private int PlayerPosY;
     private int DiceNumber;
     private bool IsFight = false;
-    private List<Skill> Player_Skills = new List<Skill>();
+    public List<Skill> Player_Skills = new List<Skill>();
+    public List<Item> Player_Items = new List<Item>(); 
     int Mapindex;
     private Map map;
     MoveDir Move_Key;
@@ -30,6 +31,7 @@ public class Player : SingleTon<Player>
         Damage = 10;
         PlayerPosX = 1;
         PlayerPosY = 1;
+        
     }
     public int GetPlayerPosX { get { return PlayerPosX; } set { } }
     public int GetPlayerPosY { get { return PlayerPosY; } set { } }
@@ -38,6 +40,15 @@ public class Player : SingleTon<Player>
     public int GetPlayerDamage { get { return Damage; } set { } }
     public bool GetIsFight { get { return IsFight; } set { IsFight = value; } }
 
+
+    public void TestItemAdd()
+    {
+        Player_Items.Add(new Potion("큰 회복 물약", 50));
+        Player_Items.Add(new Potion("작은 회복 물약", 30));
+        Player_Items.Add(new Potion("작은 회복 물약", 30));
+        Player_Items.Add(new Potion("작은 회복 물약", 30));
+        Player_Items.Add(new Potion("작은 회복 물약", 30));
+    }
     public void Init()
     {
         int Mapindex = map.GetMapIndex;
@@ -45,6 +56,7 @@ public class Player : SingleTon<Player>
 
     public void Update()
     {
+        Init();
         Input();
         Move();
     }

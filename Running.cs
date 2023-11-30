@@ -5,6 +5,7 @@ public class Running
 
     Player player;
     FightManager fightManager;
+    InventoryScene inventoryScene;
     Map map;
 
 
@@ -16,7 +17,8 @@ public class Running
 
         player = Player.GetInstance;
         fightManager = new FightManager(this);
-        
+        inventoryScene = new InventoryScene(this);
+        fightManager.GetInventoryScene(inventoryScene);
         map = new Map(this);
         player.GetMap(map);
         Dice.GetInstance.DiceCurculate();
@@ -25,7 +27,7 @@ public class Running
     public void Run()
     {
         Init();
-
+        player.TestItemAdd();
         while (true)
         {
             map.Update();

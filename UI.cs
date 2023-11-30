@@ -40,8 +40,17 @@ namespace DiceRPG
             UI_Status.AppendFormat("| 체력 : {0} / {1}    일반 데미지 : {2}  스킬 데미지 :                     \n", Player.GetInstance.GetPlayerHp, Player.GetInstance.GetPlayerFullHp, Player.GetInstance.GetPlayerDamage);
             UI_Status.AppendFormat("|_________________________________________________________________________|\n");
             return UI_Status;
-
         }
 
+        public StringBuilder Inventory_UI(Item item)
+        {
+            StringBuilder Inven_UI = new StringBuilder();
+
+            Inven_UI.AppendFormat("|                                                                         |\n");
+            Inven_UI.AppendFormat("|  {0}  설명 : {1}                                                         \n",item.GetName,item.GetSummary);
+            Inven_UI.AppendFormat("|_________________________________________________________________________|");
+
+            return Inven_UI;
+        }
     }
 }
