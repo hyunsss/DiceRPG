@@ -22,7 +22,7 @@ public class Running
         fightManager.GetInventoryScene(inventoryScene);
         map = new Map(this);
         Dice.GetInstance.DiceCurculate();
-        Data.BasicMap();
+        Data.Level1();
         
     }
 
