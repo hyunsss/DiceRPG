@@ -7,6 +7,7 @@ public class Player : SingleTon<Player>
 {
     enum MoveDir { Up, Down, Left, Right, None }
     
+    private int Money;
     private int FullHp;
     private int Hp;
     private int Damage;
@@ -25,29 +26,27 @@ public class Player : SingleTon<Player>
 
     public Player()
     {
+        Money = 1000;
         FullHp = 100;
         Hp = 100;
         Damage = 10;
         pos.x = 1;
         pos.y = 1;
-        
     }
   
+    public void GetItem(Item item)
+    {
+        Player_Items.Add(item);
+        Console.WriteLine("{0}을 구매했습니다!!", item.GetName );
+    }
+
+    public int GetMoney { get { return Money; } set { Money = value; } }
     public int GetPlayerHp { get { return Hp; } set { Hp = value; } }
     public int GetPlayerFullHp { get { return FullHp; } set { } }
     public int GetPlayerDamage { get { return Damage; } set { } }
     public int GetPlayerSkillDamage { get { return SkillDamage; } set { SkillDamage = value; } }
     public bool GetIsFight { get { return IsFight; } set { IsFight = value; } }
 
-
-    public void TestItemAdd()
-    {
-        Player_Items.Add(new Potion("큰 회복 물약", 50));
-        Player_Items.Add(new Potion("작은 회복 물약", 30));
-        Player_Items.Add(new Potion("작은 회복 물약", 30));
-        Player_Items.Add(new Potion("작은 회복 물약", 30));
-        Player_Items.Add(new Potion("작은 회복 물약", 30));
-    }
     public void Init()
     {
         

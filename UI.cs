@@ -50,15 +50,29 @@ namespace DiceRPG
             return Inven_UI;
         }
 
-        public StringBuilder MySkills_UI(Item item)
+        public StringBuilder DiceSkills_UI(Skill skills)
         {
-            StringBuilder Inven_UI = new StringBuilder();
+            StringBuilder MySkills_UI = new StringBuilder();
 
-            Inven_UI.AppendFormat("|                                                                         |\n");
-            Inven_UI.AppendFormat("|  {0}  설명 : {1}                                                         \n", item.GetName, item.GetSummary);
-            Inven_UI.AppendFormat("|_________________________________________________________________________|");
+            MySkills_UI.AppendFormat("|                                                                         |\n");
+            MySkills_UI.AppendFormat("|  설명 : {1}                                                         \n", skills.GetSummary);
+            MySkills_UI.AppendFormat("|_________________________________________________________________________|");
 
-            return Inven_UI;
+            return MySkills_UI;
         }
+        public StringBuilder Shop_UI()
+        {
+            StringBuilder MySkills_UI = new StringBuilder();
+
+            MySkills_UI.AppendFormat("|                                                                         |\n");
+            MySkills_UI.AppendFormat("|  1. 아이템 구매   2. 스킬 구매   3. 나가기   현재 돈 : {0} \n",Player.GetInstance.GetMoney);
+            MySkills_UI.AppendFormat("|_________________________________________________________________________|");
+
+            return MySkills_UI;
+        }
+
+
+
+
     }
 }
