@@ -18,6 +18,8 @@ public class Running
     {
         //콘솔 윈도우 사이즈
         Console.SetWindowSize(75, 54);
+        Data.Init();
+        Data.Level1();
 
         buyItemScene = new BuyItemScene(this);
         fightManager = new FightScene(this);
@@ -37,8 +39,6 @@ public class Running
     //    Dice.GetInstance.NewDicePer(5, 60);
         Dice.GetInstance.DiceCurculate();
 
-        Data.Init();
-        Data.Level1();
     }
 
     public void Run()
