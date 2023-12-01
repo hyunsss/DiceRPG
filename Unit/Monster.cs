@@ -7,16 +7,20 @@ using System.Threading.Tasks;
 
 namespace DiceRPG
 {
-    public abstract class Monster
+    public abstract class Monster 
     {
+        public enum MonsterBurf { IsFaint, IsWeek, IsGetMoneyX2 }
+        Map map;
         public Position pos;
         public AsciiSprite Sprite = new AsciiSprite();
         protected StringBuilder sb;
-        Map map;
+
         protected string name;
         protected int Hp;
         protected int FullHp;
         protected int Damage;
+        //몬스터 버프 디버프 통합
+        private bool[] Burf = { false, false, false };
         private int moveTurn = 0;
 
 
@@ -217,10 +221,12 @@ namespace DiceRPG
     
 
     public abstract void Attack(Player player);
+        
         public string GetName { get { return name; } }
         public int GetHp { get { return Hp;} set { Hp = value; } }
         public int GetFullHp { get { return FullHp;} set { FullHp = value; } }
         public int GetDamage { get { return Damage;} set { Damage = value; } }
+        public bool[] GetBurf { get { return Burf;} set { Burf = value; } }
     }
 
     public class Toriel : Monster
@@ -350,7 +356,8 @@ namespace DiceRPG
         }
         public override void Attack(Player player)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("ㅎ ㅎ ㅎ ㅎ ");
+            player.GetPlayerHp -= this.Damage;
         }
     }
 }

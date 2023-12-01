@@ -9,14 +9,11 @@ namespace DiceRPG
 {
     public class UI : SingleTon<UI>
     {
-        int num = 0;
-        
-        public int ReloadDice()
-        {
-            return (int)Dice.GetInstance.ReloadDice();
-        }
+        public int num = Dice.GetInstance.ReloadDice();
+
         public StringBuilder Status(Monster monster)
         {
+            
             StringBuilder UI_Status = new StringBuilder();
             //주사위 번호를 보이기위한 초기화
             DiceNumber dicenumber = new DiceNumber();
@@ -34,7 +31,7 @@ namespace DiceRPG
             UI_Status.AppendFormat("|{0}|  4 확률 : {1}%     5 확률 : {2}%      6 확률 : {3}%      \n", dicenumber.Dice[num, 4], Dice.GetInstance.DiceLoad(4), Dice.GetInstance.DiceLoad(5), Dice.GetInstance.DiceLoad(6));
             UI_Status.AppendFormat("|{0}|_______________________________________________________|\n", dicenumber.Dice[num, 5]);
             UI_Status.AppendFormat("|{0}|                                                       |\n", dicenumber.Dice[num, 6]);
-            UI_Status.AppendFormat("|{0}|  주사위 능력 : {1}                                     \n", dicenumber.Dice[num, 7], 1);
+            UI_Status.AppendFormat("|{0}|  주사위 능력 : {1}                                     \n", dicenumber.Dice[num, 7], Dice.GetInstance.GetSkill[num].GetSummary);
             UI_Status.AppendFormat("|_________________|_______________________________________________________|\n");
             UI_Status.AppendFormat("|                                                                         |\n");
             UI_Status.AppendFormat("| 체력 : {0} / {1}    일반 데미지 : {2}  스킬 데미지 :                     \n", Player.GetInstance.GetPlayerHp, Player.GetInstance.GetPlayerFullHp, Player.GetInstance.GetPlayerDamage);
@@ -48,6 +45,17 @@ namespace DiceRPG
 
             Inven_UI.AppendFormat("|                                                                         |\n");
             Inven_UI.AppendFormat("|  {0}  설명 : {1}                                                         \n",item.GetName,item.GetSummary);
+            Inven_UI.AppendFormat("|_________________________________________________________________________|");
+
+            return Inven_UI;
+        }
+
+        public StringBuilder MySkills_UI(Item item)
+        {
+            StringBuilder Inven_UI = new StringBuilder();
+
+            Inven_UI.AppendFormat("|                                                                         |\n");
+            Inven_UI.AppendFormat("|  {0}  설명 : {1}                                                         \n", item.GetName, item.GetSummary);
             Inven_UI.AppendFormat("|_________________________________________________________________________|");
 
             return Inven_UI;

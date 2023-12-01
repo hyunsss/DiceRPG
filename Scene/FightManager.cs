@@ -75,7 +75,10 @@ namespace DiceRPG
                     Thread.Sleep(400);
                     Render();
                     PlayerAttackTrue = true;
+                    UI.GetInstance.num = Dice.GetInstance.ReloadDice();
                 }
+
+                
 
                 if (monster.GetHp <= 0)
                 {

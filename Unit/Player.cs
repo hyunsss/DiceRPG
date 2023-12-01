@@ -10,12 +10,15 @@ public class Player : SingleTon<Player>
     private int FullHp;
     private int Hp;
     private int Damage;
-    public Position pos;
     private bool IsFight = false;
-    public List<Skill> Player_Skills = new List<Skill>();
-    public List<Item> Player_Items = new List<Item>(); 
-    MoveDir Move_Key;
+    private int SkillDamage;
 
+    //public List<Skill> Player_Skills = new List<Skill>();
+    public List<Item> Player_Items = new List<Item>(); 
+
+
+    MoveDir Move_Key;
+    public Position pos;
     ConsoleKeyInfo info;
     ConsoleKey key;
 
@@ -33,6 +36,7 @@ public class Player : SingleTon<Player>
     public int GetPlayerHp { get { return Hp; } set { Hp = value; } }
     public int GetPlayerFullHp { get { return FullHp; } set { } }
     public int GetPlayerDamage { get { return Damage; } set { } }
+    public int GetPlayerSkillDamage { get { return SkillDamage; } set { SkillDamage = value; } }
     public bool GetIsFight { get { return IsFight; } set { IsFight = value; } }
 
 

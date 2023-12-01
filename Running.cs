@@ -9,10 +9,10 @@ public class Running
     Map map;
 
 
-    private void Init()
+    public void Init()
     {
         //콘솔 윈도우 사이즈
-        Console.SetWindowSize(75, 48);
+        Console.SetWindowSize(75, 54);
 
         Data.Init();
 
@@ -21,6 +21,8 @@ public class Running
         inventoryScene = new InventoryScene(this);
         fightManager.GetInventoryScene(inventoryScene);
         map = new Map(this);
+        Dice.GetInstance.DicePercent();
+        Dice.GetInstance.NewDicePer(5, 60);
         Dice.GetInstance.DiceCurculate();
         Data.Level1();
         

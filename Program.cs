@@ -11,9 +11,10 @@ namespace DiceRPG
 
         static void Main(string[] args)
         {
-
             Running running = new Running();
             running.Run();
+            
+
             
         }
     }
