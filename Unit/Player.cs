@@ -116,7 +116,7 @@ public class Player : SingleTon<Player>
 
     private void NextPositionBlock(Position PrevPos)
     {
-        if (Data.map[pos.y, pos.x] == (char)Map.MapDir.Block)
+        if (Data.map[pos.y, pos.x] == (char)MapScene.MapDir.Block)
         {
             pos.y = PrevPos.y;
             pos.x = PrevPos.x;

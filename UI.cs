@@ -66,7 +66,10 @@ namespace DiceRPG
             StringBuilder MySkills_UI = new StringBuilder();
 
             MySkills_UI.AppendFormat("|                                                                         |\n");
-            MySkills_UI.AppendFormat("|  1. 아이템 구매   2. 스킬 구매   3. 스킬 강화   4. 나가기  현재 돈 : {0} \n",Player.GetInstance.GetMoney);
+            MySkills_UI.AppendFormat("|  1. 아이템 구매   2. 스킬 구매    현재 돈 : {0}      \n",Player.GetInstance.GetMoney);
+            MySkills_UI.AppendFormat("|                                                                         |\n");
+            MySkills_UI.AppendFormat("|  3. 스킬 강화     4. 주사위 확률   4. 나가기 \n", Player.GetInstance.GetMoney);
+            MySkills_UI.AppendFormat("|                                                                         |\n");
             MySkills_UI.AppendFormat("|_________________________________________________________________________|");
 
             return MySkills_UI;

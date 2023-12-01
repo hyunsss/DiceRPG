@@ -2,7 +2,7 @@ using System.Runtime.CompilerServices;
 using System;
 using DiceRPG;
 
-public class Map : Scene
+public class MapScene : Scene
 {
     public enum MapDir { Block = '#', Monster = 'M' }
     enum MapIndexDir { BasicMap }
@@ -12,7 +12,7 @@ public class Map : Scene
 
     
 
-    public Map(Running running) : base(running)
+    public MapScene(Running running) : base(running)
     {
     }
 

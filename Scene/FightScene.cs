@@ -8,14 +8,20 @@ using System.Threading.Tasks;
 
 namespace DiceRPG
 {
-    public class FightManager : Scene
+    public class FightScene : Scene
     {
+        enum RandomMonster { Flowey, GreatDog, Wimson, Jery }
+        Running running;
         InventoryScene inventoryScene;
         Monster FightMonster;
-        enum RandomMonster { Flowey, GreatDog, Wimson, Jery }
 
-        public FightManager(Running running) : base(running)
+        public FightScene(Running running) : base(running)
         {
+        }
+
+        private void Init()
+        {
+            inventoryScene = running.inventoryScene;
         }
 
         public override void Render()
@@ -30,6 +36,7 @@ namespace DiceRPG
 
         public override void Update()
         {
+            Init();
             FightMonster = Data.MonsterInPos(Player.GetInstance.pos);
             UI.GetInstance.num = Dice.GetInstance.ReloadDice();
             Render();
@@ -104,9 +111,9 @@ namespace DiceRPG
 
         }
 
-        public void GetInventoryScene(InventoryScene invenScene)
-        {
-            this.inventoryScene = invenScene;
+        public void GetRunning(Running running)
+        { 
+            this.running = running;
         }
     }
 }

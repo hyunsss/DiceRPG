@@ -10,6 +10,7 @@ namespace DiceRPG
     {
         SkillReinForceScene skillinventoryScene;
         BuyItemScene buyItemScene;
+        Running running;
         bool IsExit;
 
         public ShopScene(Running running) : base(running)
@@ -17,14 +18,15 @@ namespace DiceRPG
 
         }
 
-        public void ShopSceneInit(SkillReinForceScene a, BuyItemScene b)
+        public void GetRunning(Running running)
         {
-            skillinventoryScene = a;
-            buyItemScene = b;
+            this.running = running;
         }
 
         private void Init()
         {
+            skillinventoryScene = running.skillInventoryScene;
+            buyItemScene = running.buyItemScene;
             IsExit = false;
         }
 
@@ -36,7 +38,7 @@ namespace DiceRPG
 
         public override void Update()
         {
-
+            Init();
             Render();
             Input();
 
@@ -51,7 +53,7 @@ namespace DiceRPG
                 switch (answer)
                 {
                     case "1":
-                        //Todo 아이템 구매
+                        //아이템 구매
                         buyItemScene.Update();
                         Render();
                         break;
@@ -66,7 +68,11 @@ namespace DiceRPG
                         Render();
                         break;
                     case "4":
-                        //Todo 나가기
+                        //Todo 주사위 확률 강화
+
+                        break;
+                    case "5":
+                        //나가기
                         IsExit = true;
                         break;
                     default:

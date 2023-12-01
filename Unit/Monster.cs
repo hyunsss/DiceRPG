@@ -10,7 +10,7 @@ namespace DiceRPG
     public abstract class Monster 
     {
         public enum MonsterBurf { IsFaint, IsWeek, IsGetMoneyX2 }
-        Map map;
+        MapScene map;
         public Position pos;
         public AsciiSprite Sprite = new AsciiSprite();
         protected StringBuilder sb;
@@ -44,7 +44,7 @@ namespace DiceRPG
                     break;
             }
 
-            if (Data.map[pos.y, pos.x] == (char)Map.MapDir.Block)
+            if (Data.map[pos.y, pos.x] == (char)MapScene.MapDir.Block)
             {
                 pos = prevPos;
             } else if (Data.MonsterInPos(pos) != this)
@@ -69,20 +69,24 @@ namespace DiceRPG
             if (!PathFinding(in Data.map, pos, Player.GetInstance.pos, out path))
                 return;
 
-            if (path[1].x == pos.x)
+            if(path.Count > 1)
             {
-                if (path[1].y == pos.y - 1)
-                    TryMove(Direction.Up);
+                if (path[1].x == pos.x)
+                {
+                    if (path[1].y == pos.y - 1)
+                        TryMove(Direction.Up);
+                    else
+                        TryMove(Direction.Down);
+                }
                 else
-                    TryMove(Direction.Down);
+                {
+                    if (path[1].x == pos.x - 1)
+                        TryMove(Direction.Left);
+                    else
+                        TryMove(Direction.Right);
+                }
             }
-            else
-            {
-                if (path[1].x == pos.x - 1)
-                    TryMove(Direction.Left);
-                else
-                    TryMove(Direction.Right);
-            }
+           
 
            
         }
