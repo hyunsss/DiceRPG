@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace DiceRPG
 {
-    public class SkillInventoryScene : Scene
+    public class SkillReinForceScene : Scene
     {
         enum InputDir { Up, Down, Enter }
         InputDir Input_Key;
         (int, int) CursurPosition;
         public int SkillIndex;
         public bool Checktrue;
-        public SkillInventoryScene(Running running) : base(running)
+        public SkillReinForceScene(Running running) : base(running)
         {
         }
         public void Init()
@@ -75,7 +75,7 @@ namespace DiceRPG
 
         private void ItemDirection()
         {
-            int MaxPos_Y = 3 * Player.GetInstance.Player_Items.Count;
+            int MaxPos_Y = 4 * Dice.GetInstance.GetSkill.Length;
             int PrevCursurY = CursurPosition.Item2;
             int PrevSkillIndex = SkillIndex;
 
@@ -84,17 +84,23 @@ namespace DiceRPG
             switch (Input_Key)
             {
                 case InputDir.Up:
-                    CursurPosition.Item2 -= 3;
+                    CursurPosition.Item2 -= 4;
                     SkillIndex--;
                     break;
                 case InputDir.Down:
-                    CursurPosition.Item2 += 3;
+                    CursurPosition.Item2 += 4;
                     SkillIndex++;
                     break;
                 case InputDir.Enter:
-                    if (Player.GetInstance.Player_Items.Count != 0)
+                    if (Player.GetInstance.GetMoney > Dice.GetInstance.GetSkill[SkillIndex].GetReinforcePrize)
                     {
-                        Player.GetInstance.Player_Items[SkillIndex].Use();
+                        Player.GetInstance.GetMoney -= Dice.GetInstance.GetSkill[SkillIndex].GetReinforcePrize;
+                        Dice.GetInstance.GetSkill[SkillIndex].SkillReinForce();
+                    }
+                    else
+                    {
+                        Console.WriteLine("\n\n플레이어의 돈이 부족합니다!! ");
+                        Thread.Sleep(800);
                     }
                     Checktrue = true;
                     break;

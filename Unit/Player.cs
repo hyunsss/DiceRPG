@@ -5,8 +5,10 @@ using System.Threading.Tasks.Dataflow;
 
 public class Player : SingleTon<Player>
 {
-    enum MoveDir { Up, Down, Left, Right, None }
-    
+    enum MoveDir { Up, Down, Left, Right, Shop, None }
+
+    Running running;
+
     private int Money;
     private int FullHp;
     private int Hp;
@@ -16,10 +18,10 @@ public class Player : SingleTon<Player>
 
     //public List<Skill> Player_Skills = new List<Skill>();
     public List<Item> Player_Items = new List<Item>(); 
+    public Position pos;
 
 
     MoveDir Move_Key;
-    public Position pos;
     ConsoleKeyInfo info;
     ConsoleKey key;
 
@@ -49,7 +51,6 @@ public class Player : SingleTon<Player>
 
     public void Init()
     {
-        
     }
 
     public void Update()
@@ -78,6 +79,9 @@ public class Player : SingleTon<Player>
             case ConsoleKey.RightArrow:
                 Move_Key = MoveDir.Right;
                 break;
+            case ConsoleKey.Q:
+                Move_Key = MoveDir.Shop;
+                break;
             default:
                 Move_Key = MoveDir.None;
                 break;
@@ -101,6 +105,9 @@ public class Player : SingleTon<Player>
                 break;
             case MoveDir.Right:
                 pos.x++;
+                break;
+            case MoveDir.Shop:
+                running.shopScene.Update();
                 break;
         }
 
@@ -129,7 +136,16 @@ public class Player : SingleTon<Player>
 
     }
 
+    public void SkillAttack(Monster monster)
+    {
+        monster.GetHp -= SkillDamage;
+        Console.WriteLine("플레이어가 스킬을 사용합니다!");
+    }
 
+    public void GetRunning(Running running)
+    {
+        this.running = running;
+    }
 
 
 }

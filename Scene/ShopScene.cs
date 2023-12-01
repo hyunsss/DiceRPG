@@ -8,17 +8,30 @@ namespace DiceRPG
 {
     public class ShopScene : Scene
     {
-        SkillInventoryScene skillinventoryScene;
+        SkillReinForceScene skillinventoryScene;
         BuyItemScene buyItemScene;
+        bool IsExit;
 
         public ShopScene(Running running) : base(running)
         {
 
         }
 
+        public void ShopSceneInit(SkillReinForceScene a, BuyItemScene b)
+        {
+            skillinventoryScene = a;
+            buyItemScene = b;
+        }
+
+        private void Init()
+        {
+            IsExit = false;
+        }
+
         public override void Render()
         {
-            UI.GetInstance.Shop_UI();
+            Console.Clear();
+            Console.WriteLine(UI.GetInstance.Shop_UI());
         }
 
         public override void Update()
@@ -31,24 +44,30 @@ namespace DiceRPG
 
         private void Input()
         {
-            int answer = int.Parse(Console.ReadLine());
-            while(answer != 3)
+            string answer = "";
+            while (!IsExit)
             {
+                answer = Console.ReadLine();
                 switch (answer)
                 {
-                    case 1:
+                    case "1":
                         //Todo 아이템 구매
                         buyItemScene.Update();
+                        Render();
                         break;
-                    case 2:
+                    case "2":
                         //Todo 스킬 구매
+
+                        Render();
                         break;
-                    case 3:
+                    case "3":
                         //Dice Skill List 스킬 강화
                         skillinventoryScene.Update();
+                        Render();
                         break;
-                    case 4:
+                    case "4":
                         //Todo 나가기
+                        IsExit = true;
                         break;
                     default:
                         Input();

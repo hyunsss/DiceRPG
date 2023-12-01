@@ -13,7 +13,7 @@ namespace DiceRPG
         InputDir Input_Key;
         (int, int) CursurPosition;
         public int ItemIndex;
-        public bool Usetrue;
+        public bool Entertrue;
 
         public BuyItemScene(Running running) : base(running)
         {
@@ -24,26 +24,20 @@ namespace DiceRPG
         {
             CursurPosition = (68, 2);
             ItemIndex = 0;
-            Usetrue = false;
+            Entertrue = false;
         }
 
         public override void Render()
         {
             Console.Clear();
             StringBuilder sb = new StringBuilder();
-            if (Player.GetInstance.Player_Items.Count != 0)
+
+
+            sb.Append("___________________________________________________________________________");
+            Console.WriteLine(sb);
+            foreach (Item item in ShopItem_list)
             {
-                sb.Append("___________________________________________________________________________");
-                Console.WriteLine(sb);
-                foreach (Item item in Player.GetInstance.Player_Items)
-                {
-                    Console.WriteLine(UI.GetInstance.Inventory_UI(item));
-                }
-            }
-            else
-            {
-                sb.Append("\n\n 아이템이 존재하지 않습니다 !!! Enter눌러 나가기");
-                Console.WriteLine(sb);
+                Console.WriteLine(UI.GetInstance.Item_UI(item));
             }
 
 
@@ -54,7 +48,7 @@ namespace DiceRPG
             Init();
             Render();
             CursurRender(CursurPosition);
-            while (!Usetrue)
+            while (!Entertrue)
             {
 
                 Input();
@@ -79,12 +73,6 @@ namespace DiceRPG
                     break;
                 case ConsoleKey.Enter:
                     Input_Key = InputDir.Enter;
-                    if(Player.GetInstance.GetMoney > ShopItem_list[ItemIndex].GetPrize)
-
-                  
-                        Player.GetInstance.GetMoney -= ShopItem_list[ItemIndex].GetPrize;
-                        Player.GetInstance.GetItem(ShopItem_list[ItemIndex]);
-                    } 
                     break;
                 default:
                     break;
@@ -93,7 +81,7 @@ namespace DiceRPG
 
         private void ItemDirection()
         {
-            int MaxPos_Y = 3 * Player.GetInstance.Player_Items.Count;
+            int MaxPos_Y = 3 * ShopItem_list.Count;
             int PrevCursurY = CursurPosition.Item2;
             int PrevItemIndex = ItemIndex;
 
@@ -110,11 +98,17 @@ namespace DiceRPG
                     ItemIndex++;
                     break;
                 case InputDir.Enter:
-                    if (Player.GetInstance.Player_Items.Count != 0)
+                    if (Player.GetInstance.GetMoney > ShopItem_list[ItemIndex].GetPrize)
                     {
-                        Player.GetInstance.Player_Items[ItemIndex].Use();
+                        Player.GetInstance.GetMoney -= ShopItem_list[ItemIndex].GetPrize;
+                        Player.GetInstance.GetItem(ShopItem_list[ItemIndex].DeepCopy(ShopItem_list[ItemIndex]));
                     }
-                    Usetrue = true;
+                    else
+                    {
+                        Console.WriteLine("\n\n플레이어의 돈이 부족합니다!! ");
+                        Thread.Sleep(800);
+                    }
+                    Entertrue = true;
                     break;
             }
 
@@ -130,7 +124,6 @@ namespace DiceRPG
                 ItemIndex = PrevItemIndex;
             }
 
-
             CursurRender(CursurPosition);
         }
 
@@ -141,3 +134,6 @@ namespace DiceRPG
         }
     }
 }
+
+
+

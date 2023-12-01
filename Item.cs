@@ -17,8 +17,9 @@ namespace DiceRPG
         public string GetName { get { return name; } private set { } }
         public int GetPrize { get { return Prize; } private set { } }
         public string GetSummary { get { return Item_Summary; } private set { } }
+        public int GetRecovery { get { return RecoveryHp; } private set { } }
         public abstract void Use();
-
+        public abstract Item DeepCopy(Item item);
     }
 
     public class SmallPotion : Item
@@ -27,8 +28,14 @@ namespace DiceRPG
         public SmallPotion()
         {
             name = "작은 회복 포션";
+            Prize = 500;
             RecoveryHp = 30;
             Item_Summary = $"체력을 {this.RecoveryHp}만큼 회복 시킵니다";
+        }
+
+        public override Item DeepCopy(Item item)
+        {
+            return new SmallPotion();
         }
 
         public override void Use()
@@ -52,8 +59,14 @@ namespace DiceRPG
         public BigPotion()
         {
             name = "큰 회복 포션";
+            Prize = 700;
             RecoveryHp = 50;
             Item_Summary = $"체력을 {this.RecoveryHp}만큼 회복 시킵니다";
+        }
+
+        public override Item DeepCopy(Item item)
+        {
+            return new BigPotion();
         }
 
         public override void Use()

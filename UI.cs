@@ -9,7 +9,7 @@ namespace DiceRPG
 {
     public class UI : SingleTon<UI>
     {
-        public int num = Dice.GetInstance.ReloadDice();
+        public int num;
 
         public StringBuilder Status(Monster monster)
         {
@@ -22,7 +22,7 @@ namespace DiceRPG
             UI_Status.AppendFormat("|                                                                         |\n");
             UI_Status.AppendFormat("|  몬스터 : {0}   체력 {1} / {2}   데미지 : {3}                               \n", monster.GetName, monster.GetHp, monster.GetFullHp, monster.GetDamage);
             UI_Status.AppendFormat("|_________________________________________________________________________|\n");
-            UI_Status.AppendFormat("\n\t 1. 공격하기  \t   2. 아이템 사용  \t 3. 도망가기\n");
+            UI_Status.AppendFormat("\n   1. 공격하기   2. 아이템 사용   3. 스킬 사용   4. 도망가기\n");
             UI_Status.AppendFormat("___________________________________________________________________________\n");
             UI_Status.AppendFormat("|{0}|                                                       |\n", dicenumber.Dice[num, 0]);
             UI_Status.AppendFormat("|{0}|  1 확률 : {1}%     2 확률 : {2}%      3 확률 : {3}%      \n", dicenumber.Dice[num, 1], Dice.GetInstance.DiceLoad(1), Dice.GetInstance.DiceLoad(2), Dice.GetInstance.DiceLoad(3));
@@ -31,7 +31,7 @@ namespace DiceRPG
             UI_Status.AppendFormat("|{0}|  4 확률 : {1}%     5 확률 : {2}%      6 확률 : {3}%      \n", dicenumber.Dice[num, 4], Dice.GetInstance.DiceLoad(4), Dice.GetInstance.DiceLoad(5), Dice.GetInstance.DiceLoad(6));
             UI_Status.AppendFormat("|{0}|_______________________________________________________|\n", dicenumber.Dice[num, 5]);
             UI_Status.AppendFormat("|{0}|                                                       |\n", dicenumber.Dice[num, 6]);
-            UI_Status.AppendFormat("|{0}|  주사위 능력 : {1}                                     \n", dicenumber.Dice[num, 7], Dice.GetInstance.GetSkill[num].GetSummary);
+            UI_Status.AppendFormat("|{0}|  주사위 능력 : {1}                                     \n", dicenumber.Dice[num, 7], Dice.GetInstance.GetSkill[num].Summary());
             UI_Status.AppendFormat("|_________________|_______________________________________________________|\n");
             UI_Status.AppendFormat("|                                                                         |\n");
             UI_Status.AppendFormat("| 체력 : {0} / {1}    일반 데미지 : {2}  스킬 데미지 :                     \n", Player.GetInstance.GetPlayerHp, Player.GetInstance.GetPlayerFullHp, Player.GetInstance.GetPlayerDamage);
@@ -39,7 +39,7 @@ namespace DiceRPG
             return UI_Status;
         }
 
-        public StringBuilder Inventory_UI(Item item)
+        public StringBuilder Item_UI(Item item)
         {
             StringBuilder Inven_UI = new StringBuilder();
 
@@ -55,7 +55,8 @@ namespace DiceRPG
             StringBuilder MySkills_UI = new StringBuilder();
 
             MySkills_UI.AppendFormat("|                                                                         |\n");
-            MySkills_UI.AppendFormat("|  설명 : {1}                                                         \n", skills.GetSummary);
+            MySkills_UI.AppendFormat("|  {0}  설명 : {1}                                                 \n",skills.GetName ,skills.Summary());
+            MySkills_UI.AppendFormat("|  레벨 : {0}     강화 비용 : {1}                                   \n",skills.Getlevel ,skills.GetReinforcePrize);
             MySkills_UI.AppendFormat("|_________________________________________________________________________|");
 
             return MySkills_UI;
@@ -65,7 +66,7 @@ namespace DiceRPG
             StringBuilder MySkills_UI = new StringBuilder();
 
             MySkills_UI.AppendFormat("|                                                                         |\n");
-            MySkills_UI.AppendFormat("|  1. 아이템 구매   2. 스킬 구매   3. 나가기   현재 돈 : {0} \n",Player.GetInstance.GetMoney);
+            MySkills_UI.AppendFormat("|  1. 아이템 구매   2. 스킬 구매   3. 스킬 강화   4. 나가기  현재 돈 : {0} \n",Player.GetInstance.GetMoney);
             MySkills_UI.AppendFormat("|_________________________________________________________________________|");
 
             return MySkills_UI;

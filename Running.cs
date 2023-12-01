@@ -3,10 +3,16 @@ using DiceRPG;
 public class Running
 {
 
-    Player player;
-    FightManager fightManager;
-    InventoryScene inventoryScene;
-    Map map;
+    public FightManager fightManager;
+
+    public InventoryScene inventoryScene;
+
+    public Player player;
+    public ShopScene shopScene;
+    public SkillReinForceScene skillInventoryScene;
+    public BuyItemScene buyItemScene;
+
+    public Map map;
 
 
     public void Init()
@@ -14,15 +20,20 @@ public class Running
         //콘솔 윈도우 사이즈
         Console.SetWindowSize(75, 54);
 
-        Data.Init();
-
         player = Player.GetInstance;
+        player.GetRunning(this);
+        Data.Init();
+        Dice.GetInstance.Init();
         fightManager = new FightManager(this);
         inventoryScene = new InventoryScene(this);
+        shopScene = new ShopScene(this);
+        skillInventoryScene = new SkillReinForceScene(this);
+        buyItemScene = new BuyItemScene(this);
+        shopScene.ShopSceneInit(skillInventoryScene, buyItemScene);
         fightManager.GetInventoryScene(inventoryScene);
         map = new Map(this);
         Dice.GetInstance.DicePercent();
-        Dice.GetInstance.NewDicePer(5, 60);
+    //    Dice.GetInstance.NewDicePer(5, 60);
         Dice.GetInstance.DiceCurculate();
         Data.Level1();
         
@@ -31,7 +42,7 @@ public class Running
     public void Run()
     {
         Init();
-        player.TestItemAdd();
+
         while (true)
         {
             map.Update();

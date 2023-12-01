@@ -20,6 +20,7 @@ namespace DiceRPG
 
         public override void Render()
         {
+            Thread.Sleep(600);
             Console.Clear();
             Console.WriteLine("\n\n");
             FightMonster.Sprite.SpriteRender();
@@ -30,6 +31,7 @@ namespace DiceRPG
         public override void Update()
         {
             FightMonster = Data.MonsterInPos(Player.GetInstance.pos);
+            UI.GetInstance.num = Dice.GetInstance.ReloadDice();
             Render();
             Fight(FightMonster, Player.GetInstance);
         }
@@ -40,7 +42,7 @@ namespace DiceRPG
             bool HasDie = false;
             while (!HasDie)
             {
-
+                
                 //플레이어 공격 턴
                 if (PlayerAttackTrue)
                 {
@@ -51,7 +53,6 @@ namespace DiceRPG
                         case "1":
                             //공격하기
                             player.Attack(monster);
-                            Thread.Sleep(400);
                             Render();
                             break;
                         case "2":
@@ -60,6 +61,12 @@ namespace DiceRPG
                             Render();
                             break;
                         case "3":
+                            //스킬 사용
+                            Dice.GetInstance.GetSkill[UI.GetInstance.num].Use();
+                            UI.GetInstance.num = Dice.GetInstance.ReloadDice();
+                            Render();
+                            break;
+                        case "4":
                             //도망가기
                             player.GetIsFight = false;
                             return;
@@ -72,12 +79,11 @@ namespace DiceRPG
                 else
                 {
                     monster.Attack(player);
-                    Thread.Sleep(400);
                     Render();
                     PlayerAttackTrue = true;
-                    UI.GetInstance.num = Dice.GetInstance.ReloadDice();
                 }
 
+                    
                 
 
                 if (monster.GetHp <= 0)

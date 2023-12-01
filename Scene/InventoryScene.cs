@@ -34,7 +34,7 @@ namespace DiceRPG
                 Console.WriteLine(sb);
                 foreach (Item item in Player.GetInstance.Player_Items)
                 {
-                    Console.WriteLine(UI.GetInstance.Inventory_UI(item));
+                    Console.WriteLine(UI.GetInstance.Item_UI(item));
                 }
             }
             else

@@ -7,7 +7,7 @@ public class Map : Scene
     public enum MapDir { Block = '#', Monster = 'M' }
     enum MapIndexDir { BasicMap }
     public List<char[,]> MapList = new List<char[,]>();
-    Player player = Player.GetInstance;
+
     private int MapIndex = 0;
 
     
@@ -50,7 +50,7 @@ public class Map : Scene
             System.Console.WriteLine();
         }
 
-        Console.SetCursorPosition(player.pos.x, player.pos.y);
+        Console.SetCursorPosition(Player.GetInstance.pos.x, Player.GetInstance.pos.y);
         Console.WriteLine("P");
 
         foreach (Monster monster in Data.monsters)
