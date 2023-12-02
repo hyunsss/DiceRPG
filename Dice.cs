@@ -110,6 +110,7 @@ namespace DiceRPG
     {
         protected string name;
         protected int Damage;
+        protected int Prize;
         protected int ReinforcePrize;
         protected int RecorveryHP;
         protected int level;

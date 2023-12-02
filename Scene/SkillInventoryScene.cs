@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace DiceRPG
 {
-    public class BuySkillScene : Scene
+    public class SkillInventoryScene : Scene
     {
-        //Todo BuySkillScene
-        List<Skill> Shop_Skills = new List<Skill>();
-
         enum InputDir { Up, Down, Enter }
         InputDir Input_Key;
         (int, int) CursurPosition;
@@ -18,7 +15,7 @@ namespace DiceRPG
         public int DiceSkillIndex;
         public bool Checktrue;
 
-        public BuySkillScene(Running running) : base(running)
+        public SkillInventoryScene(Running running) : base(running)
         {
         }
 
@@ -28,12 +25,7 @@ namespace DiceRPG
             SkillIndex = 0;
             Checktrue = false;
 
-            Shop_Skills.Add(new Bang());
-            Shop_Skills.Add(new Faint());
-            Shop_Skills.Add(new RecoveryHP());
-            Shop_Skills.Add(new NormalStronger());
-            Shop_Skills.Add(new MonsterWeek());
-            Shop_Skills.Add(new GetMoneyMultiply());
+            
         }
         public override void Render()
         {
@@ -41,7 +33,7 @@ namespace DiceRPG
             StringBuilder sb = new StringBuilder();
             sb.Append("___________________________________________________________________________");
             Console.WriteLine(sb);
-            foreach (Skill skill in Shop_Skills)
+            foreach (Skill skill in Dice.GetInstance.GetSkill)
             {
                 Console.WriteLine(UI.GetInstance.DiceSkills_UI(skill));
             }
@@ -105,8 +97,18 @@ namespace DiceRPG
                     SkillIndex++;
                     break;
                 case InputDir.Enter:
-                    //Todo : SkillInventoryScene Create
-                    //원하는 스킬을 고를 수 있는 탭. 스킬 가격과 플레이어 머니의 조건체크는 여기서 함.
+                    //Todo : BuySkillScene에서 원하는 스킬을 고른 후 여기서는 
+                    //다이스 스킬의 원하는 인덱스에서 바꿔주는 역할 
+                    if (Player.GetInstance.GetMoney > Dice.GetInstance.GetSkill[SkillIndex].GetReinforcePrize)
+                    {
+                        Player.GetInstance.GetMoney -= Dice.GetInstance.GetSkill[SkillIndex].GetReinforcePrize;
+                        Dice.GetInstance.GetSkill[SkillIndex].SkillReinForce();
+                    }
+                    else
+                    {
+                        Console.WriteLine("\n\n플레이어의 돈이 부족합니다!! ");
+                        Thread.Sleep(800);
+                    }
                     Checktrue = true;
                     break;
             }
