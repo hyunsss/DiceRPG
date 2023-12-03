@@ -39,7 +39,6 @@ public class Player : SingleTon<Player>
     public void GetItem(Item item)
     {
         Player_Items.Add(item);
-        Console.WriteLine("{0}을 구매했습니다!!", item.GetName );
     }
 
     public int GetMoney { get { return Money; } set { Money = value; } }

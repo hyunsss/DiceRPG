@@ -11,7 +11,8 @@ namespace DiceRPG
     {
         public int num;
         public string NotEnoughMoney = "돈이 충분하지 않습니다!!!!";
-        public string EXIT = "";
+        public string BUYITEM = "아이템을 구매했습니다!";
+        public string EXIT = "현재 화면에서 나갑니다...";
         public string ChangeSkill = "스킬을 교체 했습니다!!!!";
         public string KILLMONSTER = "몬스터를 쓰러트렸습니다!!!!";
         public string DEATHPLAYER = "플레이어가 쓰러졌습니다....";
@@ -44,7 +45,7 @@ namespace DiceRPG
             UI_Status.AppendFormat("|{0}|  주사위 능력 : {1}                                     \n", dicenumber.Dice[num, 7], Dice.GetInstance.GetSkill[num].Summary());
             UI_Status.AppendFormat("|_________________|_______________________________________________________|\n");
             UI_Status.AppendFormat("|                                                                         |\n");
-            UI_Status.AppendFormat("| 체력 : {0} / {1}    일반 데미지 : {2}  스킬 데미지 :                     \n", Player.GetInstance.GetPlayerHp, Player.GetInstance.GetPlayerFullHp, Player.GetInstance.GetPlayerDamage);
+            UI_Status.AppendFormat("| 체력 : {0} / {1}        일반 데미지 : {2}                         \n", Player.GetInstance.GetPlayerHp, Player.GetInstance.GetPlayerFullHp, Player.GetInstance.GetPlayerDamage);
             UI_Status.AppendFormat("|_________________________________________________________________________|");
             return UI_Status;
         }
@@ -65,7 +66,7 @@ namespace DiceRPG
             StringBuilder DicePercent = new StringBuilder();
 
             DicePercent.AppendFormat("|                                                                         |\n");
-            DicePercent.AppendFormat("|  {0}       주사위 확률 : {1}                                                         \n", index, Percent );
+            DicePercent.AppendFormat("|  {0}       주사위 확률 : {1}    현재 스킬 : {2}                      \n", index, Percent, Dice.GetInstance.GetSkill[index - 1].GetName );
             DicePercent.AppendFormat("|_________________________________________________________________________|");
 
             return DicePercent;

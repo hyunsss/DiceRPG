@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DiceRPG
 {
-    public abstract class Monster 
+    public abstract class Monster
     {
         public enum MonsterBurf { IsFaint, IsWeek, IsGetMoneyX2 }
         MapScene map;
@@ -15,6 +15,7 @@ namespace DiceRPG
         public AsciiSprite Sprite = new AsciiSprite();
         protected StringBuilder sb;
 
+        protected int Gold;
         protected string name;
         protected int Hp;
         protected int FullHp;
@@ -47,7 +48,8 @@ namespace DiceRPG
             if (Data.map[pos.y, pos.x] == (char)MapScene.MapDir.Block)
             {
                 pos = prevPos;
-            } else if (Data.MonsterInPos(pos) != this)
+            }
+            else if (Data.MonsterInPos(pos) != this)
 
             {
                 pos = prevPos;
@@ -69,7 +71,7 @@ namespace DiceRPG
             if (!PathFinding(in Data.map, pos, Player.GetInstance.pos, out path))
                 return;
 
-            if(path.Count > 1)
+            if (path.Count > 1)
             {
                 if (path[1].x == pos.x)
                 {
@@ -86,9 +88,9 @@ namespace DiceRPG
                         TryMove(Direction.Right);
                 }
             }
-           
 
-           
+
+
         }
 
         /******************************************************
@@ -222,15 +224,19 @@ namespace DiceRPG
                 this.f = g + h;
             }
         }
-    
 
-    public abstract void Attack(Player player);
-        
+        public void DropGold(Player player)
+        {
+            player.GetMoney += Gold;
+        }
+
+        public abstract void Attack(Player player);
+
         public string GetName { get { return name; } }
-        public int GetHp { get { return Hp;} set { Hp = value; } }
-        public int GetFullHp { get { return FullHp;} set { FullHp = value; } }
-        public int GetDamage { get { return Damage;} set { Damage = value; } }
-        public bool[] GetBurf { get { return Burf;} set { Burf = value; } }
+        public int GetHp { get { return Hp; } set { Hp = value; } }
+        public int GetFullHp { get { return FullHp; } set { FullHp = value; } }
+        public int GetDamage { get { return Damage; } set { Damage = value; } }
+        public bool[] GetBurf { get { return Burf; } set { Burf = value; } }
     }
 
     public class Toriel : Monster
@@ -241,10 +247,11 @@ namespace DiceRPG
             Hp = 10;
             FullHp = 10;
             Damage = 1;
-            
+            Gold = 100;
         }
 
-        public void PrintSprite() {
+        public void PrintSprite()
+        {
 
         }
 
@@ -256,12 +263,13 @@ namespace DiceRPG
     }
     public class Jery : Monster
     {
-        public Jery() {
+        public Jery()
+        {
             Sprite = new S_Jery();
             Hp = 45;
             FullHp = 45;
             Damage = 8;
-            
+            Gold = 300;
         }
         public override void Attack(Player player)
         {
@@ -277,7 +285,8 @@ namespace DiceRPG
             Hp = 30;
             FullHp = 30;
             Damage = 5;
-            
+            Gold = 300;
+
         }
         public override void Attack(Player player)
         {
@@ -293,7 +302,7 @@ namespace DiceRPG
             Hp = 80;
             FullHp = 80;
             Damage = 5;
-            
+            Gold = 400;
         }
         public override void Attack(Player player)
         {
@@ -303,13 +312,14 @@ namespace DiceRPG
     }
     public class Flowey : Monster
     {
-        
-        public Flowey() {
+
+        public Flowey()
+        {
             Sprite = new S_Flowey();
             Hp = 15;
             FullHp = 15;
             Damage = 30;
-
+            Gold = 300;
         }
         public override void Attack(Player player)
         {
@@ -320,12 +330,13 @@ namespace DiceRPG
 
     public class PapyRus : Monster
     {
-        public PapyRus() {
+        public PapyRus()
+        {
             Sprite = new S_PapyRus();
             Hp = 500;
             FullHp = 500;
             Damage = 30;
-            
+            Gold = 3000;
         }
         public override void Attack(Player player)
         {
@@ -340,7 +351,7 @@ namespace DiceRPG
             Hp = 500;
             FullHp = 500;
             Damage = 30;
-            
+            Gold = 3000;
 
         }
         public override void Attack(Player player)
@@ -356,8 +367,7 @@ namespace DiceRPG
             Hp = 500;
             FullHp = 500;
             Damage = 30;
-            
-
+            Gold = 3000;
         }
         public override void Attack(Player player)
         {

@@ -89,7 +89,6 @@ namespace DiceRPG
 
             Monster undyne = new Undyne();
             undyne.pos = new Position(1, 12);
-            undyne.GetDamage = 1;
             monsters.Add(undyne);
 
             Monster jery1 = new Jery();

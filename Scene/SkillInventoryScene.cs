@@ -37,9 +37,9 @@ namespace DiceRPG
             StringBuilder sb = new StringBuilder();
             sb.Append("___________________________________________________________________________");
             Console.WriteLine(sb);
-            foreach (Skill skill in Dice.GetInstance.GetSkill)
+            for(int i = 0; i < Dice.GetInstance.GetSkill.Length - 2; i++)
             {
-                Console.WriteLine(UI.GetInstance.DiceSkills_UI(skill));
+                Console.WriteLine(UI.GetInstance.DiceSkills_UI(Dice.GetInstance.GetSkill[i]));
             }
 
 
@@ -84,7 +84,7 @@ namespace DiceRPG
 
         private void ItemDirection()
         {
-            int MaxPos_Y = 4 * Dice.GetInstance.GetSkill.Length + 9;
+            int MaxPos_Y = 4 * Dice.GetInstance.GetSkill.Length + 1;
             int PrevCursurY = CursurPosition.Item2;
             int PrevSkillIndex = SkillIndex;
 

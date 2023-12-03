@@ -102,10 +102,12 @@ namespace DiceRPG
                     {
                         Player.GetInstance.GetMoney -= ShopItem_list[ItemIndex].GetPrize;
                         Player.GetInstance.GetItem(ShopItem_list[ItemIndex].DeepCopy(ShopItem_list[ItemIndex]));
+                        Console.WriteLine(UI.GetInstance.LogMessage(UI.GetInstance.BUYITEM));
+                        Thread.Sleep(800);
                     }
                     else
                     {
-                        Console.WriteLine("\n\n플레이어의 돈이 부족합니다!! ");
+                        Console.WriteLine(UI.GetInstance.LogMessage(UI.GetInstance.NotEnoughMoney));
                         Thread.Sleep(800);
                     }
                     Entertrue = true;

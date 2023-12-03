@@ -12,7 +12,6 @@ namespace DiceRPG
 
     public class Dice : SingleTon<Dice>
     {
-        List<Skill> DiceSkills = new List<Skill>();
         public int[] DiceNumberPer = new int[120];
         private double[] DicePer = new double[6];   //다이스 확률 계산
         Skill[] Dice_Skills = new Skill[6];
@@ -24,10 +23,10 @@ namespace DiceRPG
         {
             Dice_Skills[0] = new Bang();
             Dice_Skills[1] = new Bang();
-            Dice_Skills[2] = new Bang();
+            Dice_Skills[2] = new RecoveryHP();
             Dice_Skills[3] = new RecoveryHP();
-            Dice_Skills[4] = new RecoveryHP();
-            Dice_Skills[5] = new RecoveryHP();
+            Dice_Skills[4] = new DeburfTakeHP();
+            Dice_Skills[5] = new DeburfTakeDamage();
         }
 
         public int ReloadDice()
@@ -142,7 +141,7 @@ namespace DiceRPG
             level = 1;
             name = "강타";
             Damage = 80;
-            Prize = 500;
+            Prize = 1000;
             ReinforcePrize = 300;
         }
 
@@ -217,6 +216,10 @@ namespace DiceRPG
         public override void Use()
         {
             Player.GetInstance.GetPlayerHp += RecorveryHP;
+            if(Player.GetInstance.GetPlayerHp > Player.GetInstance.GetPlayerFullHp)
+            {
+                Player.GetInstance.GetPlayerHp = Player.GetInstance.GetPlayerFullHp;
+            }
         }
     }
 
@@ -312,6 +315,74 @@ namespace DiceRPG
         {
             monster.GetBurf[(int)Monster.MonsterBurf.IsGetMoneyX2] = true;
             //Todo 몬스터 처치시 골드 2배
+        }
+    }
+
+    public class DeburfTakeHP : Skill
+    {
+        private int Minus;
+        public DeburfTakeHP()
+        {
+            name = "체력 약화";
+        }
+
+        public override void SkillReinForce()
+        {
+            Console.WriteLine(UI.GetInstance.LogMessage("이 스킬은 강화 할 수 없습니다."));
+
+        }
+
+        public override string Summary()
+        {
+            return "체력을 총 체력의 1/4만큼 깎습니다.. 단, 체력이 30 이상일 경우";
+        }
+
+        public override void Use()
+        {
+            if(Player.GetInstance.GetPlayerHp > 30)
+            {
+            Minus = Player.GetInstance.GetPlayerFullHp / 4;
+            Player.GetInstance.GetPlayerHp -= Minus;
+
+                if (Player.GetInstance.GetPlayerHp < 30)
+                {
+                    Player.GetInstance.GetPlayerHp = 30;
+                }
+            }
+        }
+    }
+
+    public class DeburfTakeDamage : Skill
+    {
+        private int Minus;
+        public DeburfTakeDamage()
+        {
+            name = "데미지 약화";
+        }
+
+        public override void SkillReinForce()
+        {
+            Console.WriteLine(UI.GetInstance.LogMessage("이 스킬은 강화 할 수 없습니다."));
+
+        }
+
+        public override string Summary()
+        {
+            return "기본 공격력을 영구히 1씩 깎습니다. 3이하로 줄지 않습니다.";
+        }
+
+        public override void Use()
+        {
+            if (Player.GetInstance.GetPlayerDamage > 3)
+            {
+                Minus = 1;
+                Player.GetInstance.GetPlayerDamage -= Minus;
+
+                if (Player.GetInstance.GetPlayerDamage < 3)
+                {
+                    Player.GetInstance.GetPlayerDamage = 3;
+                }
+            }
         }
     }
 
