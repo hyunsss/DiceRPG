@@ -9,7 +9,9 @@ public class Running
 
     public Player player;
     public ShopScene shopScene;
-    public SkillReinForceScene skillInventoryScene;
+    public SkillReinForceScene skillReinForceScene;
+    public BuySkillScene buySkillScene;
+    public SkillInventoryScene skillInventoryScene;
     public BuyItemScene buyItemScene;
     public MapScene map;
 
@@ -21,14 +23,17 @@ public class Running
         Data.Init();
         Data.Level1();
 
+        buySkillScene = new BuySkillScene(this);
         buyItemScene = new BuyItemScene(this);
         fightManager = new FightScene(this);
         inventoryScene = new InventoryScene(this);
-        skillInventoryScene = new SkillReinForceScene(this);
+        skillReinForceScene = new SkillReinForceScene(this);
+        skillInventoryScene = new SkillInventoryScene(this);
         shopScene = new ShopScene(this);
         map = new MapScene(this);
 
         player = Player.GetInstance;
+        buySkillScene.GetRunning(this);
         player.GetRunning(this);
         fightManager.GetRunning(this);
         shopScene.GetRunning(this);

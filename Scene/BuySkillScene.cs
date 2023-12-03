@@ -10,7 +10,8 @@ namespace DiceRPG
     {
         //Todo BuySkillScene
         List<Skill> Shop_Skills = new List<Skill>();
-
+        Running running;
+        SkillInventoryScene SkillInventoryScene;
         enum InputDir { Up, Down, Enter }
         InputDir Input_Key;
         (int, int) CursurPosition;
@@ -24,6 +25,7 @@ namespace DiceRPG
 
         public void Init()
         {
+            SkillInventoryScene = running.skillInventoryScene;
             CursurPosition = (68, 2);
             SkillIndex = 0;
             Checktrue = false;
@@ -107,6 +109,13 @@ namespace DiceRPG
                 case InputDir.Enter:
                     //Todo : SkillInventoryScene Create
                     //원하는 스킬을 고를 수 있는 탭. 스킬 가격과 플레이어 머니의 조건체크는 여기서 함.
+                    if(Player.GetInstance.GetMoney > Shop_Skills[SkillIndex].GetPrize)
+                    {
+
+                    } else
+                    {
+                        Console.WriteLine(UI.GetInstance.NOTENOUGHMONEY());
+                    }
                     Checktrue = true;
                     break;
             }
@@ -131,6 +140,11 @@ namespace DiceRPG
         {
             Console.SetCursorPosition(CursurPos.Item1, CursurPos.Item2);
             Console.WriteLine("<-");
+        }
+
+        public void GetRunning(Running running)
+        {
+            this.running = running;
         }
     }
 }

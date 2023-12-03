@@ -75,7 +75,16 @@ namespace DiceRPG
             return MySkills_UI;
         }
 
+        public StringBuilder NOTENOUGHMONEY()
+        {
+            StringBuilder Out = new StringBuilder();
 
+            Out.AppendFormat("|                                                                         |\n");
+            Out.AppendFormat("|        돈이 충분하지 않습니다!!!!!!!!                               \n");
+            Out.AppendFormat("|_________________________________________________________________________|");
+
+            return Out;
+        }
 
 
     }

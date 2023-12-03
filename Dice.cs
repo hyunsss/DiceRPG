@@ -117,7 +117,8 @@ namespace DiceRPG
         protected Monster monster = Data.MonsterInPos(Player.GetInstance.pos);
 
         public int GetDamage { get { return Damage; } set { Damage = value; } }
-        public string GetName { get { return this.name; } }
+        public int GetPrize { get { return Prize; } }
+        public string GetName { get { return name; } }
         public int GetReinforcePrize { get { return ReinforcePrize; } set { ReinforcePrize = value; } }
         public int Getlevel { get { return level; } }
 
@@ -139,7 +140,7 @@ namespace DiceRPG
             level = 1;
             name = "강타";
             Damage = 80;
-            
+            Prize = 500;
             ReinforcePrize = 300;
         }
 
@@ -169,6 +170,7 @@ namespace DiceRPG
         {
             level = 0;
             name = "기절";
+            Prize = 1000;
         }
 
         public override void SkillReinForce()
@@ -194,7 +196,7 @@ namespace DiceRPG
             level = 1;
             name = "회복";
             RecorveryHP = 30;
-            
+            Prize = 500;
             ReinforcePrize = 300;
         }
         public override string Summary()
@@ -229,6 +231,7 @@ namespace DiceRPG
             PlusFullHp = 100;
             PlusHp = 100;
             ReinforcePrize = 300;
+            Prize = 2000;
             name = "일반 강화";
         }
 
@@ -261,7 +264,7 @@ namespace DiceRPG
         {
             level = 0;
             name = "약화";
-            
+            Prize = 2000;
         }
 
         public override void SkillReinForce()
@@ -287,6 +290,7 @@ namespace DiceRPG
             level = 1;
             name = "현상금";
             ReinforcePrize = 2000;
+            Prize = 3000;
         }
 
         public override void SkillReinForce()

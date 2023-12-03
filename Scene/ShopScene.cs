@@ -8,7 +8,7 @@ namespace DiceRPG
 {
     public class ShopScene : Scene
     {
-        SkillReinForceScene skillinventoryScene;
+        SkillReinForceScene skillreinForceScene;
         BuyItemScene buyItemScene;
         Running running;
         bool IsExit;
@@ -25,7 +25,7 @@ namespace DiceRPG
 
         private void Init()
         {
-            skillinventoryScene = running.skillInventoryScene;
+            skillreinForceScene = running.skillReinForceScene;
             buyItemScene = running.buyItemScene;
             IsExit = false;
         }
@@ -64,7 +64,7 @@ namespace DiceRPG
                         break;
                     case "3":
                         //Dice Skill List 스킬 강화
-                        skillinventoryScene.Update();
+                        skillreinForceScene.Update();
                         Render();
                         break;
                     case "4":
