@@ -26,7 +26,7 @@ namespace DiceRPG
 
         public override void Render()
         {
-            Thread.Sleep(600);
+            Thread.Sleep(800);
             Console.Clear();
             Console.WriteLine("\n\n");
             FightMonster.Sprite.SpriteRender();
@@ -95,14 +95,14 @@ namespace DiceRPG
 
                 if (monster.GetHp <= 0)
                 {
-                    System.Console.WriteLine("몬스터를 쓰러트렸습니다!! ");
+                    Console.WriteLine(UI.GetInstance.LogMessage(UI.GetInstance.KILLMONSTER));
                     player.GetIsFight = false;
                     HasDie = true;
                     Data.monsters.Remove(monster);
                 }
                 else if (player.GetPlayerHp <= 0)
                 {
-                    System.Console.WriteLine("플레이어가 쓰러졌습니다....");
+                    Console.WriteLine(UI.GetInstance.LogMessage(UI.GetInstance.DEATHPLAYER));
                     player.GetIsFight = false;
                     HasDie = true;
                     //Todo 게임 종료 함수

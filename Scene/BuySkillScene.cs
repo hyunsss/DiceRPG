@@ -9,15 +9,24 @@ namespace DiceRPG
     public class BuySkillScene : Scene
     {
         //Todo BuySkillScene
-        List<Skill> Shop_Skills = new List<Skill>();
+        public Skill[] Shop_Skills = new Skill[]
+        {
+            new Bang(), 
+            new Faint(), 
+            new RecoveryHP(), 
+            new NormalStronger(), 
+            new MonsterWeek(), 
+            new GetMoneyMultiply()
+        };
         Running running;
         SkillInventoryScene SkillInventoryScene;
         enum InputDir { Up, Down, Enter }
         InputDir Input_Key;
         (int, int) CursurPosition;
         public int SkillIndex;
-        public int DiceSkillIndex;
         public bool Checktrue;
+
+
 
         public BuySkillScene(Running running) : base(running)
         {
@@ -29,13 +38,6 @@ namespace DiceRPG
             CursurPosition = (68, 2);
             SkillIndex = 0;
             Checktrue = false;
-
-            Shop_Skills.Add(new Bang());
-            Shop_Skills.Add(new Faint());
-            Shop_Skills.Add(new RecoveryHP());
-            Shop_Skills.Add(new NormalStronger());
-            Shop_Skills.Add(new MonsterWeek());
-            Shop_Skills.Add(new GetMoneyMultiply());
         }
         public override void Render()
         {
@@ -90,7 +92,7 @@ namespace DiceRPG
 
         private void ItemDirection()
         {
-            int MaxPos_Y = 3 * Dice.GetInstance.GetSkill.Length;
+            int MaxPos_Y = 4 * Dice.GetInstance.GetSkill.Length;
             int PrevCursurY = CursurPosition.Item2;
             int PrevSkillIndex = SkillIndex;
 
@@ -99,11 +101,11 @@ namespace DiceRPG
             switch (Input_Key)
             {
                 case InputDir.Up:
-                    CursurPosition.Item2 -= 3;
+                    CursurPosition.Item2 -= 4;
                     SkillIndex--;
                     break;
                 case InputDir.Down:
-                    CursurPosition.Item2 += 3;
+                    CursurPosition.Item2 += 4;
                     SkillIndex++;
                     break;
                 case InputDir.Enter:
@@ -111,10 +113,11 @@ namespace DiceRPG
                     //원하는 스킬을 고를 수 있는 탭. 스킬 가격과 플레이어 머니의 조건체크는 여기서 함.
                     if(Player.GetInstance.GetMoney > Shop_Skills[SkillIndex].GetPrize)
                     {
-
+                        SkillInventoryScene.Update();
                     } else
                     {
-                        Console.WriteLine(UI.GetInstance.NOTENOUGHMONEY());
+                        Console.WriteLine(UI.GetInstance.LogMessage(UI.GetInstance.NotEnoughMoney));
+                        Thread.Sleep(700);
                     }
                     Checktrue = true;
                     break;

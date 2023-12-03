@@ -9,6 +9,8 @@ namespace DiceRPG
     public class SkillInventoryScene : Scene
     {
         enum InputDir { Up, Down, Enter }
+        BuySkillScene BuySkillScene;
+        Running running;
         InputDir Input_Key;
         (int, int) CursurPosition;
         public int SkillIndex;
@@ -21,7 +23,8 @@ namespace DiceRPG
 
         public void Init()
         {
-            CursurPosition = (68, 2);
+            BuySkillScene = running.buySkillScene;
+            CursurPosition = (68, 10);
             SkillIndex = 0;
             Checktrue = false;
 
@@ -30,6 +33,7 @@ namespace DiceRPG
         public override void Render()
         {
             Console.Clear();
+            Console.WriteLine(UI.GetInstance.ChangeSkills_UI(BuySkillScene.Shop_Skills[BuySkillScene.SkillIndex]));
             StringBuilder sb = new StringBuilder();
             sb.Append("___________________________________________________________________________");
             Console.WriteLine(sb);
@@ -80,7 +84,7 @@ namespace DiceRPG
 
         private void ItemDirection()
         {
-            int MaxPos_Y = 3 * Dice.GetInstance.GetSkill.Length;
+            int MaxPos_Y = 4 * Dice.GetInstance.GetSkill.Length + 9;
             int PrevCursurY = CursurPosition.Item2;
             int PrevSkillIndex = SkillIndex;
 
@@ -89,32 +93,26 @@ namespace DiceRPG
             switch (Input_Key)
             {
                 case InputDir.Up:
-                    CursurPosition.Item2 -= 3;
+                    CursurPosition.Item2 -= 4;
                     SkillIndex--;
                     break;
                 case InputDir.Down:
-                    CursurPosition.Item2 += 3;
+                    CursurPosition.Item2 += 4;
                     SkillIndex++;
                     break;
                 case InputDir.Enter:
                     //Todo : BuySkillScene에서 원하는 스킬을 고른 후 여기서는 
                     //다이스 스킬의 원하는 인덱스에서 바꿔주는 역할 
-                    if (Player.GetInstance.GetMoney > Dice.GetInstance.GetSkill[SkillIndex].GetReinforcePrize)
-                    {
-                        Player.GetInstance.GetMoney -= Dice.GetInstance.GetSkill[SkillIndex].GetReinforcePrize;
-                        Dice.GetInstance.GetSkill[SkillIndex].SkillReinForce();
-                    }
-                    else
-                    {
-                        Console.WriteLine("\n\n플레이어의 돈이 부족합니다!! ");
-                        Thread.Sleep(800);
-                    }
+                    Player.GetInstance.GetMoney -= BuySkillScene.Shop_Skills[BuySkillScene.SkillIndex].GetPrize;
+                    Dice.GetInstance.GetSkill[SkillIndex] = BuySkillScene.Shop_Skills[BuySkillScene.SkillIndex];
+                    Console.WriteLine(UI.GetInstance.LogMessage(UI.GetInstance.ChangeSkill)); 
+                    Thread.Sleep(800);
                     Checktrue = true;
                     break;
             }
 
             //Exception
-            if (CursurPosition.Item2 < 2)
+            if (CursurPosition.Item2 < 10)
             {
                 CursurPosition.Item2 = PrevCursurY;
                 SkillIndex = PrevSkillIndex;
@@ -133,6 +131,11 @@ namespace DiceRPG
         {
             Console.SetCursorPosition(CursurPos.Item1, CursurPos.Item2);
             Console.WriteLine("<-");
+        }
+
+        public void GetRunning(Running running)
+        {
+            this.running = running;
         }
     }
 }

@@ -14,9 +14,11 @@ namespace DiceRPG
     {
         List<Skill> DiceSkills = new List<Skill>();
         public int[] DiceNumberPer = new int[120];
-        public double[] DicePer = new double[6];   //다이스 확률 계산
+        private double[] DicePer = new double[6];   //다이스 확률 계산
         Skill[] Dice_Skills = new Skill[6];
         public Skill[] GetSkill { get { return Dice_Skills; } set { GetSkill = value; } }
+        public double[] GetDicePer { get { return DicePer; } }
+        
 
         public void Init()
         {
@@ -146,7 +148,7 @@ namespace DiceRPG
 
         public override void SkillReinForce()
         {
-            Console.WriteLine("스킬을 강화합니다. 데미지가 50만큼 올랐습니다.");
+            Console.WriteLine(UI.GetInstance.LogMessage("스킬을 강화합니다. 데미지가 50만큼 올랐습니다."));
             level++;
             Damage += 50;
             ReinforcePrize += 500;
@@ -175,7 +177,7 @@ namespace DiceRPG
 
         public override void SkillReinForce()
         {
-            Console.WriteLine("이 스킬은 강화 할 수 없습니다.");
+            Console.WriteLine(UI.GetInstance.LogMessage("이 스킬은 강화 할 수 없습니다."));
         }
 
         public override string Summary()
@@ -206,7 +208,7 @@ namespace DiceRPG
 
         public override void SkillReinForce()
         {
-            Console.WriteLine("스킬을 강화합니다. 회복력이 10만큼 올랐습니다.");
+            Console.WriteLine(UI.GetInstance.LogMessage("스킬을 강화합니다. 회복력이 10만큼 올랐습니다."));
             level++;
             RecorveryHP += 10;
             ReinforcePrize += 500;
@@ -242,7 +244,7 @@ namespace DiceRPG
 
         public override void SkillReinForce()
         {
-            Console.WriteLine("스킬을 강화합니다. 능력치가 전체적으로 상승합니다.");
+            Console.WriteLine(UI.GetInstance.LogMessage("스킬을 강화합니다. 능력치가 전체적으로 상승합니다."));
             level++;
             ReinforcePrize += 500;
             PlusDamage += 30;
@@ -269,7 +271,7 @@ namespace DiceRPG
 
         public override void SkillReinForce()
         {
-            Console.WriteLine("이 스킬은 강화 할 수 없습니다.");
+            Console.WriteLine(UI.GetInstance.LogMessage("이 스킬은 강화 할 수 없습니다."));
         }
 
         public override string Summary()
@@ -295,7 +297,7 @@ namespace DiceRPG
 
         public override void SkillReinForce()
         {
-            Console.WriteLine("스킬을 강화합니다. 능력치가 전체적으로 상승합니다.");
+            Console.WriteLine(UI.GetInstance.LogMessage("스킬을 강화합니다. 사용 시 능력치가 전체적으로 상승합니다."));
             ReinforcePrize += 2000;
             level++;
             //Todo 몬스터 처치시 골드 3배

@@ -9,7 +9,9 @@ namespace DiceRPG
     public class ShopScene : Scene
     {
         SkillReinForceScene skillreinForceScene;
+        BuySkillScene buySkillScene;
         BuyItemScene buyItemScene;
+        BuyDicePercentScene buyDicePercentScene;
         Running running;
         bool IsExit;
 
@@ -26,7 +28,9 @@ namespace DiceRPG
         private void Init()
         {
             skillreinForceScene = running.skillReinForceScene;
+            buySkillScene = running.buySkillScene;
             buyItemScene = running.buyItemScene;
+            buyDicePercentScene = running.buyDicePercentScene;
             IsExit = false;
         }
 
@@ -59,7 +63,7 @@ namespace DiceRPG
                         break;
                     case "2":
                         //Todo 스킬 구매
-
+                        buySkillScene.Update();
                         Render();
                         break;
                     case "3":
@@ -69,7 +73,8 @@ namespace DiceRPG
                         break;
                     case "4":
                         //Todo 주사위 확률 강화
-
+                        buyDicePercentScene.Update();
+                        Render();
                         break;
                     case "5":
                         //나가기

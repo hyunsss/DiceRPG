@@ -96,10 +96,11 @@ namespace DiceRPG
                     {
                         Player.GetInstance.GetMoney -= Dice.GetInstance.GetSkill[SkillIndex].GetReinforcePrize;
                         Dice.GetInstance.GetSkill[SkillIndex].SkillReinForce();
+                        Thread.Sleep(800);
                     }
                     else
                     {
-                        Console.WriteLine("\n\n플레이어의 돈이 부족합니다!! ");
+                        Console.WriteLine(UI.GetInstance.LogMessage(UI.GetInstance.NotEnoughMoney));
                         Thread.Sleep(800);
                     }
                     Checktrue = true;

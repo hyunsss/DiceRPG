@@ -12,6 +12,7 @@ public class Running
     public SkillReinForceScene skillReinForceScene;
     public BuySkillScene buySkillScene;
     public SkillInventoryScene skillInventoryScene;
+    public BuyDicePercentScene buyDicePercentScene;
     public BuyItemScene buyItemScene;
     public MapScene map;
 
@@ -29,11 +30,13 @@ public class Running
         inventoryScene = new InventoryScene(this);
         skillReinForceScene = new SkillReinForceScene(this);
         skillInventoryScene = new SkillInventoryScene(this);
+        buyDicePercentScene = new BuyDicePercentScene(this);
         shopScene = new ShopScene(this);
         map = new MapScene(this);
 
         player = Player.GetInstance;
         buySkillScene.GetRunning(this);
+        skillInventoryScene.GetRunning(this);
         player.GetRunning(this);
         fightManager.GetRunning(this);
         shopScene.GetRunning(this);
@@ -44,6 +47,7 @@ public class Running
     //    Dice.GetInstance.NewDicePer(5, 60);
         Dice.GetInstance.DiceCurculate();
 
+        player.GetMoney = 99999;
     }
 
     public void Run()

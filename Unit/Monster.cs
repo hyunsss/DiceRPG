@@ -250,7 +250,8 @@ namespace DiceRPG
 
         public override void Attack(Player player)
         {
-            Console.WriteLine("  . . . .  ");
+            Console.WriteLine(UI.GetInstance.LogMessage("날 공격하다니..."));
+
         }
     }
     public class Jery : Monster
@@ -264,7 +265,7 @@ namespace DiceRPG
         }
         public override void Attack(Player player)
         {
-            Console.WriteLine(" . . . . . . ");
+            Console.WriteLine(UI.GetInstance.LogMessage("누구,,,?"));
             player.GetPlayerHp -= this.Damage;
         }
     }
@@ -280,7 +281,7 @@ namespace DiceRPG
         }
         public override void Attack(Player player)
         {
-            Console.WriteLine(" . . . . . . !! ");
+            Console.WriteLine(UI.GetInstance.LogMessage(" . . . . . . !! "));
             player.GetPlayerHp -= this.Damage;
         }
     }
@@ -296,7 +297,7 @@ namespace DiceRPG
         }
         public override void Attack(Player player)
         {
-            Console.WriteLine("왈! 왈!");
+            Console.WriteLine(UI.GetInstance.LogMessage("왈! 왈! 와ㅏㅏㅏㅏㅏ라랄ㄹㄹㄹ!"));
             player.GetPlayerHp -= this.Damage;
         }
     }
@@ -312,7 +313,7 @@ namespace DiceRPG
         }
         public override void Attack(Player player)
         {
-            Console.WriteLine("ㅎ ㅎ ㅎ ㅎ ");
+            Console.WriteLine(UI.GetInstance.LogMessage("난 착한 친구란다?"));
             player.GetPlayerHp -= this.Damage;
         }
     }
@@ -360,7 +361,7 @@ namespace DiceRPG
         }
         public override void Attack(Player player)
         {
-            Console.WriteLine("ㅎ ㅎ ㅎ ㅎ ");
+            Console.WriteLine(UI.GetInstance.LogMessage("나, 언다인이, 널 쓰러뜨릴 것이다!"));
             player.GetPlayerHp -= this.Damage;
         }
     }

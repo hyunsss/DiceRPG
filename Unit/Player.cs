@@ -44,8 +44,8 @@ public class Player : SingleTon<Player>
 
     public int GetMoney { get { return Money; } set { Money = value; } }
     public int GetPlayerHp { get { return Hp; } set { Hp = value; } }
-    public int GetPlayerFullHp { get { return FullHp; } set { } }
-    public int GetPlayerDamage { get { return Damage; } set { } }
+    public int GetPlayerFullHp { get { return FullHp; } set { FullHp = value; } }
+    public int GetPlayerDamage { get { return Damage; } set { Damage = value; } }
     public int GetPlayerSkillDamage { get { return SkillDamage; } set { SkillDamage = value; } }
     public bool GetIsFight { get { return IsFight; } set { IsFight = value; } }
 
@@ -132,14 +132,14 @@ public class Player : SingleTon<Player>
     public void Attack(Monster monster)
     {
         monster.GetHp -= Damage;
-        Console.WriteLine("플레이어가 공격합니다!");
+        Console.WriteLine(UI.GetInstance.LogMessage(UI.GetInstance.ATTACKPLAYER));
 
     }
 
     public void SkillAttack(Monster monster)
     {
         monster.GetHp -= SkillDamage;
-        Console.WriteLine("플레이어가 스킬을 사용합니다!");
+        Console.WriteLine(UI.GetInstance.LogMessage(UI.GetInstance.USESKILLPLAYER));
     }
 
     public void GetRunning(Running running)

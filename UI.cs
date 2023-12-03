@@ -10,6 +10,16 @@ namespace DiceRPG
     public class UI : SingleTon<UI>
     {
         public int num;
+        public string NotEnoughMoney = "돈이 충분하지 않습니다!!!!";
+        public string EXIT = "";
+        public string ChangeSkill = "스킬을 교체 했습니다!!!!";
+        public string KILLMONSTER = "몬스터를 쓰러트렸습니다!!!!";
+        public string DEATHPLAYER = "플레이어가 쓰러졌습니다....";
+        public string ATTACKPLAYER = "플레이어가 공격합니다!";
+        public string USESKILLPLAYER = "플레이어가 스킬을 사용합니다";
+        public string DICEPERUPGRADEBEFORE = "선택한 주사위 번호의 확률을 4% 증가합니다. -500골드";
+        public string DICEPERUPGRADEAFTER = "선택한 주사위 번호의 확률을 증가시켰습니다!!";
+
 
         public StringBuilder Status(Monster monster)
         {
@@ -35,7 +45,7 @@ namespace DiceRPG
             UI_Status.AppendFormat("|_________________|_______________________________________________________|\n");
             UI_Status.AppendFormat("|                                                                         |\n");
             UI_Status.AppendFormat("| 체력 : {0} / {1}    일반 데미지 : {2}  스킬 데미지 :                     \n", Player.GetInstance.GetPlayerHp, Player.GetInstance.GetPlayerFullHp, Player.GetInstance.GetPlayerDamage);
-            UI_Status.AppendFormat("|_________________________________________________________________________|\n");
+            UI_Status.AppendFormat("|_________________________________________________________________________|");
             return UI_Status;
         }
 
@@ -50,6 +60,17 @@ namespace DiceRPG
             return Inven_UI;
         }
 
+        public StringBuilder DicePercent_UI(int index, double Percent)
+        {
+            StringBuilder DicePercent = new StringBuilder();
+
+            DicePercent.AppendFormat("|                                                                         |\n");
+            DicePercent.AppendFormat("|  {0}       주사위 확률 : {1}                                                         \n", index, Percent );
+            DicePercent.AppendFormat("|_________________________________________________________________________|");
+
+            return DicePercent;
+        }
+
         public StringBuilder DiceSkills_UI(Skill skills)
         {
             StringBuilder MySkills_UI = new StringBuilder();
@@ -61,6 +82,25 @@ namespace DiceRPG
 
             return MySkills_UI;
         }
+
+        public StringBuilder ChangeSkills_UI(Skill skills)
+        {
+            StringBuilder MySkills_UI = new StringBuilder();
+
+            MySkills_UI.AppendFormat("___________________________________________________________________________");
+            MySkills_UI.AppendFormat("|                                                                         |\n");
+            MySkills_UI.AppendFormat("|                                                                         |\n");
+            MySkills_UI.AppendFormat("|  {0}  설명 : {1}                                                 \n", skills.GetName, skills.Summary());
+            MySkills_UI.AppendFormat("|  레벨 : {0}                                        \n", skills.Getlevel);
+            MySkills_UI.AppendFormat("|_________________________________________________________________________|");
+            MySkills_UI.AppendFormat("|                                                                         |\n");
+            MySkills_UI.AppendFormat("|                                                                         |\n");
+            MySkills_UI.AppendFormat("|   선택한 스킬을 위 스킬과 교체합니다. ||  원래 있던 스킬은 사라집니다.       |\n");
+            MySkills_UI.AppendFormat("|_________________________________________________________________________|");
+
+            return MySkills_UI;
+        }
+
         public StringBuilder Shop_UI()
         {
             StringBuilder MySkills_UI = new StringBuilder();
@@ -75,12 +115,13 @@ namespace DiceRPG
             return MySkills_UI;
         }
 
-        public StringBuilder NOTENOUGHMONEY()
+        public StringBuilder LogMessage(string str)
         {
             StringBuilder Out = new StringBuilder();
 
+            Out.AppendFormat("___________________________________________________________________________\n");
             Out.AppendFormat("|                                                                         |\n");
-            Out.AppendFormat("|        돈이 충분하지 않습니다!!!!!!!!                               \n");
+            Out.AppendFormat("|        {0}                               \n",str);
             Out.AppendFormat("|_________________________________________________________________________|");
 
             return Out;
