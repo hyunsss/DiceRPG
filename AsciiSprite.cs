@@ -17,6 +17,22 @@ namespace DiceRPG
 
     }
 
+    public class MainMenuSprite : AsciiSprite 
+    { 
+        public MainMenuSprite()
+        {
+            sb = new StringBuilder();
+            sb.Append("\n\n\n\n ######    #######  #######  #######           ######   #######  #######\n");
+            sb.Append("  ##  ##     ###    ##  ###  ##                ##  ##   ##   ##  ##   ##\n");
+            sb.Append("  ##  ##     ###    ##  ###  ##                ##  ##   ##   ##  ##     \n");
+            sb.Append("  ### ###    ###    ##       #######           #######  #######  ## ####\n");
+            sb.Append("  ### ###    ###    ##   ##  ###               ### ###  ###      ##  ###\n");
+            sb.Append("  ### ###    ###    ##   ##  ###               ### ###  ###      ##  ###\n");
+            sb.Append("  #######  #######  #######  #######           ### ###  ###      #######\n");
+            sb.Append("                                                                       \n");        
+        }
+    }
+
     public class DiceNumber : AsciiSprite
     {
         public string[,] Dice;

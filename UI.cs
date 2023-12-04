@@ -31,7 +31,7 @@ namespace DiceRPG
 
             UI_Status.AppendFormat("___________________________________________________________________________\n");
             UI_Status.AppendFormat("|                                                                         |\n");
-            UI_Status.AppendFormat("|  몬스터 : {0}   체력 {1} / {2}   데미지 : {3}                               \n", monster.GetName, monster.GetHp, monster.GetFullHp, monster.GetDamage);
+            UI_Status.AppendFormat("|  몬스터 : {0}   체력 {1} / {2}   데미지 : {3}              \n", monster.GetName, monster.GetHp, monster.GetFullHp, monster.GetDamage);
             UI_Status.AppendFormat("|_________________________________________________________________________|\n");
             UI_Status.AppendFormat("\n   1. 공격하기   2. 아이템 사용   3. 스킬 사용   4. 도망가기\n");
             UI_Status.AppendFormat("___________________________________________________________________________\n");
@@ -42,10 +42,10 @@ namespace DiceRPG
             UI_Status.AppendFormat("|{0}|  4 확률 : {1}%     5 확률 : {2}%      6 확률 : {3}%      \n", dicenumber.Dice[num, 4], Dice.GetInstance.DiceLoad(4), Dice.GetInstance.DiceLoad(5), Dice.GetInstance.DiceLoad(6));
             UI_Status.AppendFormat("|{0}|_______________________________________________________|\n", dicenumber.Dice[num, 5]);
             UI_Status.AppendFormat("|{0}|                                                       |\n", dicenumber.Dice[num, 6]);
-            UI_Status.AppendFormat("|{0}|  주사위 능력 : {1}                                     \n", dicenumber.Dice[num, 7], Dice.GetInstance.GetSkill[num].Summary());
+            UI_Status.AppendFormat("|{0}|  주사위 능력 : {1}                      \n", dicenumber.Dice[num, 7], Dice.GetInstance.GetSkill[num].Summary());
             UI_Status.AppendFormat("|_________________|_______________________________________________________|\n");
             UI_Status.AppendFormat("|                                                                         |\n");
-            UI_Status.AppendFormat("| 체력 : {0} / {1}        일반 데미지 : {2}                         \n", Player.GetInstance.GetPlayerHp, Player.GetInstance.GetPlayerFullHp, Player.GetInstance.GetPlayerDamage);
+            UI_Status.AppendFormat("| 체력 : {0} / {1}        일반 데미지 : {2}                  \n", Player.GetInstance.GetPlayerHp, Player.GetInstance.GetPlayerFullHp, Player.GetInstance.GetPlayerDamage);
             UI_Status.AppendFormat("|_________________________________________________________________________|");
             return UI_Status;
         }
@@ -66,7 +66,7 @@ namespace DiceRPG
             StringBuilder DicePercent = new StringBuilder();
 
             DicePercent.AppendFormat("|                                                                         |\n");
-            DicePercent.AppendFormat("|  {0}       주사위 확률 : {1}    현재 스킬 : {2}                      \n", index, Percent, Dice.GetInstance.GetSkill[index - 1].GetName );
+            DicePercent.AppendFormat("|  {0}       주사위 확률 : {1}    현재 스킬 : {2}  레벨 : {3}Lv           \n", index, Percent, Dice.GetInstance.GetSkill[index - 1].GetName, Dice.GetInstance.GetSkill[index - 1].Getlevel);
             DicePercent.AppendFormat("|_________________________________________________________________________|");
 
             return DicePercent;
@@ -88,15 +88,13 @@ namespace DiceRPG
         {
             StringBuilder MySkills_UI = new StringBuilder();
 
-            MySkills_UI.AppendFormat("___________________________________________________________________________");
+            MySkills_UI.AppendFormat("___________________________________________________________________________\n");
             MySkills_UI.AppendFormat("|                                                                         |\n");
-            MySkills_UI.AppendFormat("|                                                                         |\n");
-            MySkills_UI.AppendFormat("|  {0}  설명 : {1}                                                 \n", skills.GetName, skills.Summary());
+            MySkills_UI.AppendFormat("|  {0}  설명 : {1} \n", skills.GetName, skills.Summary());
             MySkills_UI.AppendFormat("|  레벨 : {0}                                        \n", skills.Getlevel);
-            MySkills_UI.AppendFormat("|_________________________________________________________________________|");
+            MySkills_UI.AppendFormat("|__________________________________________________________________________\n");
             MySkills_UI.AppendFormat("|                                                                         |\n");
-            MySkills_UI.AppendFormat("|                                                                         |\n");
-            MySkills_UI.AppendFormat("|   선택한 스킬을 위 스킬과 교체합니다. ||  원래 있던 스킬은 사라집니다.       |\n");
+            MySkills_UI.AppendFormat("|   선택한 스킬을 위 스킬과 교체합니다. ||  원래 있던 스킬은 사라집니다.       \n");
             MySkills_UI.AppendFormat("|_________________________________________________________________________|");
 
             return MySkills_UI;
@@ -122,7 +120,7 @@ namespace DiceRPG
 
             Out.AppendFormat("___________________________________________________________________________\n");
             Out.AppendFormat("|                                                                         |\n");
-            Out.AppendFormat("|        {0}                               \n",str);
+            Out.AppendFormat("|      {0}                               \n",str);
             Out.AppendFormat("|_________________________________________________________________________|");
 
             return Out;

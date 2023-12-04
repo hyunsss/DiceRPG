@@ -334,7 +334,7 @@ namespace DiceRPG
 
         public override string Summary()
         {
-            return "체력을 총 체력의 1/4만큼 깎습니다.. 단, 체력이 30 이상일 경우";
+            return "체력을 총 체력의 1/4만큼 깎습니다..";
         }
 
         public override void Use()
@@ -368,7 +368,7 @@ namespace DiceRPG
 
         public override string Summary()
         {
-            return "기본 공격력을 영구히 1씩 깎습니다. 3이하로 줄지 않습니다.";
+            return "기본 공격력을 영구히 1씩 깎습니다.";
         }
 
         public override void Use()

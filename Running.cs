@@ -9,6 +9,7 @@ public class Running
 
     public Player player;
     public ShopScene shopScene;
+    public MainMenuScene mainMenuScene;
     public SkillReinForceScene skillReinForceScene;
     public BuySkillScene buySkillScene;
     public SkillInventoryScene skillInventoryScene;
@@ -28,6 +29,7 @@ public class Running
         buyItemScene = new BuyItemScene(this);
         fightManager = new FightScene(this);
         inventoryScene = new InventoryScene(this);
+        mainMenuScene = new MainMenuScene(this);
         skillReinForceScene = new SkillReinForceScene(this);
         skillInventoryScene = new SkillInventoryScene(this);
         buyDicePercentScene = new BuyDicePercentScene(this);
@@ -53,6 +55,7 @@ public class Running
     public void Run()
     {
         Init();
+        mainMenuScene.Update();
 
         while (true)
         {

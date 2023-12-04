@@ -9,6 +9,7 @@ namespace DiceRPG
     public static class Data
     {
         public static char[,] map;
+        public static Position MapCursurPos;
         public static List<Monster> monsters;
 
         public static void Init()
@@ -46,7 +47,6 @@ namespace DiceRPG
             {'#',' ',' ',' ','#'},
             {'#','#','#','#','#'}
             };
-            Player.GetInstance.pos = new Position(1, 1);
 
 
             Monster jery1 = new Jery();
@@ -84,20 +84,28 @@ namespace DiceRPG
             {'#',' ',' ','#','#',' ',' ',' ',' ',' ',' ',' ','#','#','#','#','#','#',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','#',' ',' ',' ',' ',' ',' ',' ','#'},//15
             {'#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#','#'},//16
             };
-
+            MapCursurPos = new Position(17, 0);
             Player.GetInstance.pos = new Position(1, 14);
 
             Monster undyne = new Undyne();
-            undyne.pos = new Position(1, 12);
+            undyne.pos = new Position(37, 14);
             monsters.Add(undyne);
 
             Monster jery1 = new Jery();
             jery1.pos = new Position(3, 2);
             monsters.Add(jery1);
 
+            Monster jery2 = new Jery();
+            jery2.pos = new Position(9, 12);
+            monsters.Add(jery2);
+
             Monster wimson1 = new Wimson();
             wimson1.pos = new Position(19, 2);
             monsters.Add(wimson1);
+
+            Monster wimson2 = new Wimson();
+            wimson2.pos = new Position(2, 5);
+            monsters.Add(wimson2);
 
             Monster greatdog1 = new GreatDog();
             greatdog1.pos = new Position(37, 14);

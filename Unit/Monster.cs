@@ -236,6 +236,7 @@ namespace DiceRPG
         public int GetHp { get { return Hp; } set { Hp = value; } }
         public int GetFullHp { get { return FullHp; } set { FullHp = value; } }
         public int GetDamage { get { return Damage; } set { Damage = value; } }
+        public int GetGold { get { return Gold; } }
         public bool[] GetBurf { get { return Burf; } set { Burf = value; } }
     }
 

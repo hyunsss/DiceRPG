@@ -95,7 +95,9 @@ namespace DiceRPG
 
                 if (monster.GetHp <= 0)
                 {
-                    Console.WriteLine(UI.GetInstance.LogMessage(UI.GetInstance.KILLMONSTER));
+                    monster.DropGold(player);
+                    Console.WriteLine(UI.GetInstance.LogMessage($"몬스터를 쓰러트렸습니다 {monster.GetGold}골드를 얻습니다."));
+                    Thread.Sleep(800);
                     player.GetIsFight = false;
                     HasDie = true;
                     Data.monsters.Remove(monster);
@@ -103,6 +105,7 @@ namespace DiceRPG
                 else if (player.GetPlayerHp <= 0)
                 {
                     Console.WriteLine(UI.GetInstance.LogMessage(UI.GetInstance.DEATHPLAYER));
+                    Thread.Sleep(800);
                     player.GetIsFight = false;
                     HasDie = true;
                     //Todo 게임 종료 함수
