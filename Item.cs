@@ -11,6 +11,7 @@ namespace DiceRPG
         protected string name;
         protected int Prize;
         protected int RecoveryHp;
+        protected int PlusDamage;
         protected string Item_Summary;
 
 
@@ -82,6 +83,26 @@ namespace DiceRPG
             Player.GetInstance.Player_Items.Remove(this);
         }
 
+    }
+
+    public class PowerPotion : Item
+    {
+        public PowerPotion()
+        {
+            name = "강인한 포션";
+            Prize = 900;
+            PlusDamage = 3;
+            Item_Summary = $"데미지를 {this.PlusDamage}만큼 영구히 증가 시킵니다";
+        }
+        public override Item DeepCopy(Item item)
+        {
+            return new PowerPotion();
+        }
+
+        public override void Use()
+        {
+            Player.GetInstance.GetPlayerDamage += PlusDamage;
+        }
     }
 
 

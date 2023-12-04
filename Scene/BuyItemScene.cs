@@ -19,6 +19,8 @@ namespace DiceRPG
         {
             ShopItem_list.Add(new SmallPotion());
             ShopItem_list.Add(new BigPotion());
+            ShopItem_list.Add(new PowerPotion());
+            
         }
         public void Init()
         {
